@@ -434,7 +434,7 @@
       <span>👥 ask Q4–Q7 to <strong>≥2 people</strong></span>
     </div>
 
-    <form id="auditForm">
+    <form id="auditForm" onsubmit="return false;">
       <input type="hidden" id="dateRangeHidden" value="Aug 25–31, 2026" />
 
       <!-- Q1 -->
@@ -634,15 +634,18 @@
         answersContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
 
-      submitBtn.addEventListener('click', renderAnswers);
+      // Show answers button
+      submitBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        renderAnswers();
+      });
 
-      // PDF download
-      pdfBtn.addEventListener('click', function() {
+      // PDF download button
+      pdfBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
         // First, make sure answers are shown so PDF includes them
         renderAnswers();
-
-        const element = document.getElementById('app');
-        const opt = {
-          margin:       0.5,
-          filename:     `Audit_Feedback_${dateRange.replace(/ – /g, '_')}.pdf`,
-          image:        { type: 'jpeg', quali
+        
+        // Show loading state
+        pdfBtn.classList.add('btn-
