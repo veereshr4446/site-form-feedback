@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>✨ Site Audit Form · Sister’s answers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>✨ Site Audit Form · Feedback</title>
   <!-- html2pdf library (CDN) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <style>
@@ -11,7 +11,7 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     }
 
     body {
@@ -19,32 +19,33 @@
       background: linear-gradient(145deg, #f9f0ff 0%, #ffe9f4 100%);
       display: flex;
       justify-content: center;
-      align-items: center;
-      padding: 2rem 1.5rem;
+      align-items: flex-start;
+      padding: 1rem 0.8rem;
     }
 
     .card {
       max-width: 820px;
       width: 100%;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.85);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border-radius: 56px;
-      padding: 2.8rem 3rem;
+      border-radius: 40px;
+      padding: 1.8rem 1.5rem;
       box-shadow: 0 30px 60px rgba(196, 113, 245, 0.20), 0 12px 30px rgba(255, 140, 200, 0.12);
       border: 1px solid rgba(255, 255, 255, 0.7);
       transition: 0.25s ease;
+      margin: 0.5rem 0;
     }
 
-    @media (max-width: 550px) {
+    @media (max-width: 480px) {
       .card {
-        padding: 2rem 1.5rem;
-        border-radius: 36px;
+        padding: 1.2rem 1rem;
+        border-radius: 28px;
       }
     }
 
     h1 {
-      font-size: 2.4rem;
+      font-size: 1.8rem;
       font-weight: 700;
       background: linear-gradient(135deg, #b35cf7, #ff6b9d);
       -webkit-background-clip: text;
@@ -57,11 +58,17 @@
       flex-wrap: wrap;
     }
 
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
     .subhead {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: #6b4a7a;
       margin-top: 0.3rem;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       border-left: 4px solid #d9b0ff;
       padding-left: 1rem;
       background: rgba(255, 220, 240, 0.3);
@@ -70,35 +77,54 @@
       font-weight: 450;
     }
 
-    .subhead strong {
-      color: #a54ddb;
-      font-weight: 600;
+    @media (max-width: 480px) {
+      .subhead {
+        font-size: 0.85rem;
+        padding-left: 0.8rem;
+      }
     }
 
     .date-badge {
       background: #ffffffcc;
       backdrop-filter: blur(4px);
-      padding: 0.4rem 1.2rem;
+      padding: 0.3rem 1rem;
       border-radius: 40px;
       display: inline-block;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       font-weight: 500;
       color: #471f5a;
       border: 1px solid #e7d0f5;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
       box-shadow: 0 4px 10px rgba(190, 130, 230, 0.08);
+      width: 100%;
+      text-align: center;
+    }
+
+    @media (max-width: 480px) {
+      .date-badge {
+        font-size: 0.75rem;
+        padding: 0.25rem 0.8rem;
+      }
     }
 
     .question-block {
-      background: rgba(255, 245, 250, 0.5);
+      background: rgba(255, 245, 250, 0.6);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      border-radius: 32px;
-      padding: 1.6rem 1.8rem;
-      margin-bottom: 1.5rem;
+      border-radius: 24px;
+      padding: 1.2rem 1.2rem;
+      margin-bottom: 1.2rem;
       border: 1px solid rgba(255, 255, 255, 0.8);
       transition: 0.2s;
       box-shadow: 0 6px 18px rgba(210, 150, 255, 0.06);
+    }
+
+    @media (max-width: 480px) {
+      .question-block {
+        padding: 1rem 0.9rem;
+        border-radius: 20px;
+        margin-bottom: 0.9rem;
+      }
     }
 
     .question-block:hover {
@@ -109,57 +135,74 @@
     .q-label {
       display: flex;
       align-items: baseline;
-      gap: 0.6rem;
+      gap: 0.5rem;
       flex-wrap: wrap;
       font-weight: 600;
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: #2d143b;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.7rem;
+    }
+
+    @media (max-width: 480px) {
+      .q-label {
+        font-size: 0.9rem;
+        gap: 0.4rem;
+      }
     }
 
     .q-number {
       background: #b084d9;
       color: white;
-      width: 28px;
-      height: 28px;
+      width: 26px;
+      height: 26px;
       border-radius: 30px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 700;
       flex-shrink: 0;
     }
 
     .q-hint {
       font-weight: 400;
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: #7b5b8b;
       background: #efe2f8;
-      padding: 0.2rem 1rem;
+      padding: 0.15rem 0.8rem;
       border-radius: 30px;
-      margin-left: 0.2rem;
+      margin-left: 0.1rem;
     }
 
     .q-note {
-      font-size: 0.85rem;
+      font-size: 0.75rem;
       color: #b484cf;
       background: #f3e6fc;
-      padding: 0.2rem 0.9rem;
+      padding: 0.15rem 0.8rem;
       border-radius: 40px;
       font-weight: 400;
     }
 
     input, textarea, select {
       width: 100%;
-      padding: 0.9rem 1.2rem;
+      padding: 0.8rem 1rem;
       border: 1.5px solid #eed7fc;
-      border-radius: 40px;
+      border-radius: 30px;
       font-size: 1rem;
       background: white;
       transition: 0.15s ease;
       color: #1f0d29;
       box-shadow: inset 0 2px 6px rgba(0,0,0,0.01);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    @media (max-width: 480px) {
+      input, textarea, select {
+        padding: 0.7rem 0.9rem;
+        font-size: 0.95rem;
+        border-radius: 24px;
+      }
     }
 
     input:focus, textarea:focus, select:focus {
@@ -169,47 +212,58 @@
     }
 
     textarea {
-      border-radius: 28px;
+      border-radius: 24px;
       resize: vertical;
-      min-height: 70px;
+      min-height: 60px;
+    }
+
+    @media (max-width: 480px) {
+      textarea {
+        min-height: 50px;
+        border-radius: 20px;
+      }
     }
 
     .btn-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 1.2rem;
+      gap: 0.8rem;
+      margin-top: 1rem;
     }
 
     .btn {
       background: linear-gradient(135deg, #b45cf7, #e46aae);
       border: none;
-      padding: 1rem 2.8rem;
-      border-radius: 60px;
+      padding: 0.9rem 1.5rem;
+      border-radius: 50px;
       font-weight: 700;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
       color: white;
       letter-spacing: 0.3px;
       box-shadow: 0 12px 28px rgba(192, 90, 240, 0.3);
       cursor: pointer;
       transition: all 0.2s;
       flex: 1;
-      min-width: 200px;
+      min-width: 150px;
       border: 1px solid rgba(255, 255, 255, 0.4);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.8rem;
+      gap: 0.6rem;
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .btn:hover {
-      transform: scale(1.01);
-      box-shadow: 0 20px 36px rgba(191, 80, 240, 0.4);
-      background: linear-gradient(135deg, #c372ff, #f57bbd);
+    @media (max-width: 480px) {
+      .btn {
+        padding: 0.8rem 1.2rem;
+        font-size: 1rem;
+        min-width: 120px;
+        border-radius: 40px;
+      }
     }
 
     .btn:active {
-      transform: scale(0.97);
+      transform: scale(0.96);
     }
 
     .btn-pdf {
@@ -217,23 +271,30 @@
       box-shadow: 0 12px 28px rgba(60, 90, 200, 0.3);
     }
 
-    .btn-pdf:hover {
-      background: linear-gradient(135deg, #4f8ee8, #7f5fd0);
-      box-shadow: 0 20px 36px rgba(60, 90, 200, 0.4);
+    .btn-pdf:active {
+      transform: scale(0.96);
     }
 
     .answers-box {
-      margin-top: 2.4rem;
-      background: rgba(255, 255, 255, 0.7);
+      margin-top: 1.8rem;
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(10px);
-      border-radius: 40px;
-      padding: 2rem 2rem 1.8rem;
+      border-radius: 32px;
+      padding: 1.5rem 1.2rem;
       border: 1px solid #f6e2ff;
       box-shadow: 0 20px 40px rgba(150, 80, 200, 0.08);
     }
 
+    @media (max-width: 480px) {
+      .answers-box {
+        padding: 1.2rem 1rem;
+        border-radius: 24px;
+        margin-top: 1.2rem;
+      }
+    }
+
     .answers-box h3 {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 600;
       color: #381e47;
       display: flex;
@@ -242,14 +303,29 @@
       margin-bottom: 0.8rem;
     }
 
+    @media (max-width: 480px) {
+      .answers-box h3 {
+        font-size: 1rem;
+      }
+    }
+
     .answer-item {
       background: white;
-      padding: 0.8rem 1.2rem;
-      border-radius: 40px;
-      margin-bottom: 0.6rem;
-      border-left: 5px solid #d9b3ff;
+      padding: 0.7rem 1rem;
+      border-radius: 30px;
+      margin-bottom: 0.5rem;
+      border-left: 4px solid #d9b3ff;
       word-break: break-word;
       box-shadow: 0 2px 8px rgba(200, 150, 255, 0.06);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 480px) {
+      .answer-item {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+        border-radius: 24px;
+      }
     }
 
     .answer-item strong {
@@ -257,22 +333,29 @@
     }
 
     .footnote {
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
+      margin-top: 1.2rem;
+      font-size: 0.85rem;
       color: #593d68;
       background: #f3e5ff;
-      padding: 0.6rem 1.2rem;
+      padding: 0.5rem 1rem;
       border-radius: 40px;
       display: inline-block;
     }
 
+    @media (max-width: 480px) {
+      .footnote {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.8rem;
+      }
+    }
+
     .emoji-big {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       line-height: 1;
     }
 
     hr {
-      margin: 1.8rem 0 0.8rem;
+      margin: 1.5rem 0 0.8rem;
       border: 1px dashed #ddc3f0;
       opacity: 0.4;
     }
@@ -280,27 +363,57 @@
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 1rem;
+      gap: 0.8rem;
     }
+
     @media (max-width: 550px) {
-      .two-col { grid-template-columns: 1fr; }
+      .two-col {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+      }
     }
 
-    /* PDF-specific: ensure background & colors print nicely */
-    @media print {
-      body { background: white; padding: 0.5in; }
-      .card { box-shadow: none; border: 1px solid #ddd; backdrop-filter: none; }
-      .btn-group { display: none; }
-      .question-block { break-inside: avoid; }
+    .second-person-label {
+      background: #f0defa;
+      padding: 0.15rem 1rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      color: #4c2a5c;
+      display: inline-block;
+      margin-top: 0.5rem;
+      margin-bottom: 0.3rem;
     }
 
-    /* additional thoughts special style */
+    @media (max-width: 480px) {
+      .second-person-label {
+        font-size: 0.7rem;
+        padding: 0.1rem 0.8rem;
+      }
+    }
+
+    /* Additional thoughts special style */
     .thoughts-block {
       background: linear-gradient(135deg, rgba(255, 235, 250, 0.7), rgba(235, 220, 255, 0.7));
       border: 2px solid #d9b3ff;
     }
+
     .thoughts-block .q-label {
       color: #4a1f5e;
+    }
+
+    /* PDF-specific: ensure background & colors print nicely */
+    @media print {
+      body { background: white; padding: 0.3in; }
+      .card { box-shadow: none; border: 1px solid #ddd; backdrop-filter: none; }
+      .btn-group { display: none; }
+      .question-block { break-inside: avoid; }
+      input, textarea { border-color: #ccc; }
+    }
+
+    /* Loading state for PDF button */
+    .btn-loading {
+      opacity: 0.7;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -308,17 +421,17 @@
   <div class="card" id="app">
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
       <h1>
-        <span class="emoji-big">🌸</span> Audit pulse
+        <span class="emoji-big">🌸</span> Site audit form • Feedback
       </h1>
-      <span style="font-size: 2rem;">💜</span>
+      <span style="font-size: 1.8rem;">💜</span>
     </div>
     <div class="subhead">
       ✦ 11 questions · honest &amp; quick · answers appear below ✦
     </div>
     <div class="date-badge">
       📅 <span id="dateRangeDisplay">Aug 25–31, 2026</span>
-      <span style="margin-left: 0.8rem; opacity:0.7;">|</span>
-      <span style="margin-left: 0.8rem;">👥 ask Q4–Q7 to <strong>≥2 people</strong></span>
+      <span style="margin: 0 0.5rem; opacity:0.7;">|</span>
+      <span>👥 ask Q4–Q7 to <strong>≥2 people</strong></span>
     </div>
 
     <form id="auditForm">
@@ -346,9 +459,9 @@
       <div class="question-block" style="border-left: 4px solid #bb7ad8;">
         <div class="q-label"><span class="q-number">4</span> Before this form, how did you usually record a site audit? <span class="q-note">ask ≥2 people</span></div>
         <textarea id="q4" rows="2" placeholder="WhatsApp, paper, Excel later… (first person)"></textarea>
-        <div style="margin-top: 0.7rem;">
-          <span style="background:#f0defa; padding:0.2rem 1rem; border-radius:40px; font-size:0.8rem; color:#4c2a5c;">second person</span>
-          <input type="text" id="q4b" placeholder="second person's answer" style="margin-top:0.5rem;" />
+        <div style="margin-top: 0.5rem;">
+          <span class="second-person-label">👤 second person</span>
+          <input type="text" id="q4b" placeholder="second person's answer" style="margin-top:0.3rem;" />
         </div>
       </div>
 
@@ -356,9 +469,9 @@
       <div class="question-block" style="border-left: 4px solid #bb7ad8;">
         <div class="q-label"><span class="q-number">5</span> Old way: time per site (finish audit → data in tracker) <span class="q-note">ask ≥2 people</span></div>
         <input type="text" id="q5" placeholder="first person: e.g. ~15 min" />
-        <div style="margin-top: 0.7rem;">
-          <span style="background:#f0defa; padding:0.2rem 1rem; border-radius:40px; font-size:0.8rem; color:#4c2a5c;">second person</span>
-          <input type="text" id="q5b" placeholder="second person's answer" style="margin-top:0.5rem;" />
+        <div style="margin-top: 0.5rem;">
+          <span class="second-person-label">👤 second person</span>
+          <input type="text" id="q5b" placeholder="second person's answer" style="margin-top:0.3rem;" />
         </div>
       </div>
 
@@ -372,9 +485,9 @@
       <div class="question-block" style="border-left: 4px solid #bb7ad8;">
         <div class="q-label"><span class="q-number">7</span> Lost / forgot details with old method? (illegible, missed notes) <span class="q-note">ask ≥2 people</span></div>
         <input type="text" id="q7" placeholder="first person: e.g. yes, often" />
-        <div style="margin-top: 0.7rem;">
-          <span style="background:#f0defa; padding:0.2rem 1rem; border-radius:40px; font-size:0.8rem; color:#4c2a5c;">second person</span>
-          <input type="text" id="q7b" placeholder="second person's answer" style="margin-top:0.5rem;" />
+        <div style="margin-top: 0.5rem;">
+          <span class="second-person-label">👤 second person</span>
+          <input type="text" id="q7b" placeholder="second person's answer" style="margin-top:0.3rem;" />
         </div>
       </div>
 
@@ -402,10 +515,10 @@
         <input type="text" id="q11" placeholder="e.g. It's cut my admin in half." />
       </div>
 
-      <!-- ✨ ADDITIONAL THOUGHTS (new question, no number) -->
+      <!-- ✨ ADDITIONAL THOUGHTS -->
       <div class="question-block thoughts-block">
         <div class="q-label" style="gap: 0.8rem;">
-          <span style="background: #d9b3ff; color: white; width: 28px; height: 28px; border-radius: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0;">💭</span>
+          <span style="background: #d9b3ff; color: white; width: 26px; height: 26px; border-radius: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0;">💭</span>
           Additional thoughts <span class="q-hint" style="background: #e3c9f5;">anything else you want to share</span>
         </div>
         <textarea id="q12" rows="3" placeholder="Any extra feedback, context, or things I should know..."></textarea>
@@ -413,7 +526,7 @@
 
       <div class="btn-group">
         <button type="button" class="btn" id="submitBtn">
-          <span>✨</span> Show all answers <span>✨</span>
+          <span>✨</span> Show answers <span>✨</span>
         </button>
         <button type="button" class="btn btn-pdf" id="pdfBtn">
           <span>📄</span> Download PDF <span>⬇️</span>
@@ -528,21 +641,8 @@
         // First, make sure answers are shown so PDF includes them
         renderAnswers();
 
-        // Use html2pdf to capture the entire card
         const element = document.getElementById('app');
         const opt = {
           margin:       0.5,
-          filename:     `Audit_Answers_${dateRange.replace(/ – /g, '_')}.pdf`,
-          image:        { type: 'jpeg', quality: 0.98 },
-          html2canvas:  { scale: 2, useCORS: true, letterRendering: true, backgroundColor: '#ffffff' },
-          jsPDF:        { unit: 'in', format: 'a4', orientation: 'portrait' },
-          pagebreak:    { mode: ['avoid-all', 'css', 'legacy'] }
-        };
-        html2pdf().set(opt).from(element).save();
-      });
-
-      // optional: auto-show on load? keeping manual.
-    })();
-  </script>
-</body>
-</html>
+          filename:     `Audit_Feedback_${dateRange.replace(/ – /g, '_')}.pdf`,
+          image:        { type: 'jpeg', quali
