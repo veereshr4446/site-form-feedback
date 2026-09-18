@@ -1,824 +1,926 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
-  <title>✨ Team Audit Feedback · Colorful Form</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Site Audit Feedback Form — collect structured feedback from field teams and export as PDF." />
+  <title>Site Audit Feedback Form</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
+    /* ---------- Reset ---------- */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:          #f6f8fb;
+      --bg-2:        #eef2f7;
+      --surface:     #ffffff;
+      --border:      #e5e9f0;
+      --border-2:    #d6dce6;
+      --text:        #0f172a;
+      --text-2:      #475569;
+      --text-3:      #8b96a8;
+      --accent:      #2563eb;
+      --accent-h:    #1d4ed8;
+      --accent-soft: #eff6ff;
+      --success:     #059669;
+      --error:       #dc2626;
+      --radius:      12px;
+      --radius-sm:   8px;
+      --shadow-xs:   0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-sm:   0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md:   0 4px 12px rgba(15, 23, 42, 0.06), 0 2px 4px rgba(15, 23, 42, 0.03);
+      --shadow-lg:   0 12px 32px rgba(15, 23, 42, 0.08), 0 4px 8px rgba(15, 23, 42, 0.04);
     }
+
+    html { -webkit-text-size-adjust: 100%; }
 
     body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+                   'Helvetica Neue', Arial, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 50% -10%, #eaf1ff 0%, transparent 60%),
+        var(--bg);
+      color: var(--text);
+      font-size: 15px;
+      line-height: 1.55;
       min-height: 100vh;
-      background: linear-gradient(145deg, #f9f0ff 0%, #e5f4ff 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem 0.75rem;
+      padding: 48px 20px 96px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .form-container {
-      max-width: 1100px;
-      width: 100%;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(12px);
-      border-radius: 2.5rem;
-      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.08), 0 10px 20px rgba(0, 0, 0, 0.03), inset 0 0 0 1px rgba(255, 255, 255, 0.9);
-      padding: 2rem 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      transition: all 0.2s ease;
-    }
+    /* ---------- Layout ---------- */
+    .container { max-width: 820px; margin: 0 auto; }
 
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1e2b3c;
+    /* ---------- Top bar ---------- */
+    .topbar {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 0.25rem;
-      letter-spacing: -0.02em;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 28px;
       flex-wrap: wrap;
     }
 
-    h1 span {
-      background: linear-gradient(135deg, #b45eff, #5f9bff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .subhead {
-      font-size: 0.95rem;
-      color: #4a5b6e;
-      margin-bottom: 2rem;
-      border-left: 6px solid #b45eff;
-      padding-left: 1rem;
-      font-weight: 400;
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 0 100px 100px 0;
-      line-height: 1.4;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.25rem 1.5rem;
-    }
-
-    .full-width {
-      grid-column: 1 / -1;
-    }
-
-    .card {
-      background: white;
-      border-radius: 1.5rem;
-      padding: 1.25rem 1.25rem;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.02);
-      border: 1px solid #ffffff;
-      transition: all 0.2s;
+    .brand {
       display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-2);
+      letter-spacing: 0.01em;
     }
 
-    .card:hover {
-      box-shadow: 0 18px 28px -8px rgba(104, 76, 255, 0.12), 0 4px 12px rgba(0, 0, 0, 0.02);
-      border-color: #eae0ff;
-    }
-
-    .label-row {
-      display: flex;
-      align-items: baseline;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-
-    .q-num {
+    .brand__mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, #b45eff, #6d8cff);
-      color: white;
+      color: #fff;
       font-weight: 700;
-      font-size: 0.8rem;
-      width: 1.8rem;
-      height: 1.8rem;
-      border-radius: 50%;
-      box-shadow: 0 4px 8px rgba(106, 76, 255, 0.25);
-      flex-shrink: 0;
+      font-size: 12px;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
     }
 
-    .q-text {
-      font-weight: 600;
-      font-size: 0.98rem;
-      color: #1d2b3a;
-      line-height: 1.4;
-    }
-
-    .hint {
-      font-size: 0.78rem;
-      color: #718096;
-      font-style: italic;
-      background: #f3f6fe;
-      padding: 0.15rem 0.65rem;
-      border-radius: 30px;
-      display: inline-block;
-      font-weight: 400;
-      border: 1px solid #e0e7ff;
-    }
-
-    input, textarea, select {
-      width: 100%;
-      padding: 0.8rem 1rem;
-      border: 2px solid #e9edf5;
-      border-radius: 1.25rem;
-      font-size: 0.95rem;
-      background: #fbfdff;
-      transition: all 0.2s;
-      color: #111;
+    .badge-status {
+      font-size: 12px;
       font-weight: 500;
-      outline: none;
-      resize: vertical;
+      color: var(--success);
+      background: #ecfdf5;
+      border: 1px solid #a7f3d0;
+      padding: 4px 10px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .badge-status::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px 32px 28px;
+      margin-bottom: 20px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #2563eb, #4f46e5, #7c3aed);
+    }
+
+    .hero__eyebrow {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .hero h1 {
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .hero p {
+      font-size: 14.5px;
+      color: var(--text-2);
+      max-width: 560px;
+    }
+
+    .hero__meta {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    .meta-item svg { color: var(--text-3); flex-shrink: 0; }
+
+    /* ---------- Progress ---------- */
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: var(--text-2);
+    }
+
+    .progress__bar {
+      flex: 1;
+      height: 6px;
+      background: var(--bg-2);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .progress__fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #2563eb, #4f46e5);
+      border-radius: 999px;
+      transition: width 0.35s ease;
+    }
+
+    .progress__count {
+      font-variant-numeric: tabular-nums;
+      font-weight: 600;
+      color: var(--text);
+      min-width: 40px;
+      text-align: right;
+    }
+
+    /* ---------- Form card ---------- */
+    .form-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .form-card__body { padding: 8px 32px; }
+
+    /* ---------- Field group ---------- */
+    .field-group {
+      padding: 24px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .field-group:last-child { border-bottom: none; }
+
+    .field-group__head {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .field-num {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      border: 1px solid #dbeafe;
+      margin-top: 1px;
+    }
+
+    .field-label {
+      font-size: 14.5px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.45;
+      cursor: pointer;
+    }
+
+    .field-hint {
+      font-size: 12.5px;
+      color: var(--text-3);
+      margin-left: 38px;
+      margin-bottom: 12px;
+    }
+
+    /* ---------- Inputs ---------- */
+    .input-wrap { margin-left: 38px; }
+
+    input[type="text"],
+    input[type="number"],
+    select,
+    textarea {
+      width: 100%;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--surface);
+      border: 1px solid var(--border-2);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
       -webkit-appearance: none;
       appearance: none;
-      font-family: inherit;
+    }
+
+    input::placeholder,
+    textarea::placeholder { color: var(--text-3); }
+
+    input:hover,
+    select:hover,
+    textarea:hover { border-color: #94a3b8; }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.10);
+      background: #fdfdff;
     }
 
     select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7a8e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-size: 1rem;
-      padding-right: 2.5rem;
+      background-position: right 14px center;
+      padding-right: 40px;
+      cursor: pointer;
     }
 
-    input:focus, textarea:focus, select:focus {
-      border-color: #a47eff;
-      background: white;
-      box-shadow: 0 0 0 5px rgba(164, 126, 255, 0.15);
-    }
+    textarea { resize: vertical; min-height: 92px; line-height: 1.5; }
 
-    textarea {
-      min-height: 85px;
-    }
-
-    .inline-group {
+    /* ---------- Multi-person sub-fields ---------- */
+    .sub-fields {
       display: flex;
-      gap: 0.6rem;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .sub-field {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 14px;
       align-items: center;
     }
 
-    .persona-tag {
-      background: #f1f4ff;
-      border-radius: 30px;
-      padding: 0.2rem 0.8rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #3b4b7a;
+    .sub-field__label {
       display: inline-flex;
       align-items: center;
-      gap: 0.25rem;
-      border: 1px solid #d2defc;
-      white-space: nowrap;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-2);
     }
 
-    .persona-tag i {
-      font-style: normal;
-      font-size: 1rem;
+    .sub-field__label::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
     }
 
-    .footer-actions {
-      margin-top: 2rem;
+    /* ---------- Section labels ---------- */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      padding: 24px 0 8px;
+    }
+
+    /* ---------- Actions ---------- */
+    .form-actions {
+      background: linear-gradient(180deg, #f8fafc, #f1f5f9);
+      border-top: 1px solid var(--border);
+      padding: 20px 32px;
       display: flex;
-      flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
-      background: rgba(255, 255, 255, 0.6);
-      border-radius: 2.5rem;
-      padding: 0.8rem 1rem 0.8rem 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(8px);
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .action-buttons {
+    .form-actions__note {
+      font-size: 12.5px;
+      color: var(--text-3);
+    }
+
+    .form-actions__buttons {
       display: flex;
-      gap: 0.75rem;
+      gap: 10px;
       flex-wrap: wrap;
-      width: 100%;
-      justify-content: stretch;
     }
 
     .btn {
-      border: none;
-      padding: 0.8rem 1.25rem;
-      border-radius: 2rem;
-      font-weight: 600;
-      font-size: 0.9rem;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.15s ease;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      background: white;
-      color: #1e2b3c;
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
-      border: 1px solid #ffffff;
-      letter-spacing: -0.01em;
-      flex: 1 1 auto;
+      gap: 8px;
       white-space: nowrap;
+      line-height: 1;
     }
 
-    .btn-primary {
-      background: linear-gradient(135deg, #7e5eff, #4f8cff);
-      color: white;
-      box-shadow: 0 14px 24px -8px #7e5eff80, 0 4px 10px rgba(0, 0, 0, 0.05);
-      border: none;
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
-    .btn-primary:hover {
-      background: linear-gradient(135deg, #6a44ff, #3a7aff);
-      transform: scale(1.02);
-      box-shadow: 0 18px 28px -6px #7e5effb3;
-    }
+    .btn svg { flex-shrink: 0; }
 
     .btn-secondary {
-      background: white;
-      border: 1.5px solid #cfdfff;
-      color: #2f3e6b;
-      box-shadow: none;
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border-2);
+      box-shadow: var(--shadow-xs);
     }
 
     .btn-secondary:hover {
-      background: #f4f9ff;
-      border-color: #7e9eff;
+      background: #f8fafc;
+      border-color: #94a3b8;
     }
 
-    .btn:active {
-      transform: scale(0.98);
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25),
+                  inset 0 1px 0 rgba(255,255,255,0.15);
     }
 
-    .pdf-icon {
-      font-size: 1.2rem;
+    .btn-primary:hover {
+      background: var(--accent-h);
+      border-color: var(--accent-h);
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35),
+                  inset 0 1px 0 rgba(255,255,255,0.15);
+      transform: translateY(-1px);
     }
 
-    .counter-badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #e6eeff;
-      color: #2e4b9e;
-      border-radius: 30px;
-      padding: 0.15rem 0.75rem;
-      font-weight: 600;
-      font-size: 0.8rem;
-    }
+    .btn-primary:active { transform: translateY(0); }
 
-    .muted {
-      color: #6b7a8e;
-      font-size: 0.8rem;
-      font-weight: 400;
-    }
-
-    /* Toast */
+    /* ---------- Toast ---------- */
     .toast {
       position: fixed;
-      bottom: 1.5rem;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: #1e2b3c;
-      color: white;
-      padding: 0.85rem 1.5rem;
-      border-radius: 2rem;
-      font-size: 0.9rem;
+      background: var(--text);
+      color: #fff;
+      font-size: 13.5px;
       font-weight: 500;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      padding: 12px 20px;
+      border-radius: var(--radius-sm);
+      box-shadow: var(--shadow-lg);
       opacity: 0;
-      transition: all 0.35s ease;
-      z-index: 9999;
-      max-width: 90%;
-      text-align: center;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+      pointer-events: none;
+      z-index: 1000;
+      max-width: 90vw;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .toast.show {
+    .toast.is-visible {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
 
-    .toast.success {
-      background: linear-gradient(135deg, #7e5eff, #4f8cff);
-    }
+    .toast--success { background: var(--success); }
+    .toast--error   { background: var(--error); }
 
-    .toast.error {
-      background: #e53e3e;
-    }
-
-    /* Mobile-first refinements */
+    /* ---------- Mobile ---------- */
     @media (max-width: 640px) {
-      body {
-        padding: 0.75rem 0.5rem;
-        align-items: flex-start;
-      }
+      body { padding: 24px 12px 80px; }
 
-      .form-container {
-        padding: 1.5rem 1rem;
-        border-radius: 1.75rem;
-      }
+      .hero { padding: 24px 20px; }
+      .hero h1 { font-size: 22px; }
 
-      h1 {
-        font-size: 1.65rem;
-      }
+      .form-card__body { padding: 4px 20px; }
+      .form-actions { padding: 16px 20px; flex-direction: column-reverse; align-items: stretch; }
+      .form-actions__note { text-align: center; }
+      .form-actions__buttons { flex-direction: column; }
+      .btn { width: 100%; }
 
-      .subhead {
-        font-size: 0.85rem;
-        margin-bottom: 1.5rem;
-        padding-left: 0.85rem;
-      }
+      .input-wrap { margin-left: 0; }
+      .field-hint { margin-left: 0; }
 
-      .grid {
+      .sub-field {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 6px;
       }
 
-      .card {
-        padding: 1rem 1rem;
-        border-radius: 1.25rem;
-      }
-
-      .q-num {
-        width: 1.6rem;
-        height: 1.6rem;
-        font-size: 0.75rem;
-      }
-
-      .q-text {
-        font-size: 0.92rem;
-      }
-
-      input, textarea, select {
-        padding: 0.75rem 0.9rem;
-        font-size: 0.9rem;
-        border-radius: 1.1rem;
-      }
-
-      .footer-actions {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0.9rem 1rem;
-        border-radius: 1.5rem;
-        gap: 0.8rem;
-      }
-
-      .action-buttons {
-        flex-direction: column;
-        gap: 0.6rem;
-      }
-
-      .btn {
-        padding: 0.8rem 1rem;
-        font-size: 0.9rem;
-        justify-content: center;
-        width: 100%;
-        white-space: normal;
-      }
-
-      .inline-group {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.5rem;
-      }
-
-      .persona-tag {
-        align-self: flex-start;
-      }
-
-      .label-row {
-        gap: 0.4rem;
-      }
-    }
-
-    @media (max-width: 380px) {
-      .form-container {
-        padding: 1.25rem 0.8rem;
-      }
-      h1 {
-        font-size: 1.4rem;
-      }
-      .q-text {
-        font-size: 0.85rem;
-      }
-    }
-
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #cbb9ff;
-      border-radius: 20px;
+      .topbar { justify-content: center; }
     }
   </style>
 </head>
 <body>
-  <div class="form-container">
-    <h1>
-      <span>✨ Site Audit Form</span>
-      <span style="font-size: 1.8rem;">📋</span>
-    </h1>
-    <div class="subhead">
-      ⏱️ quick · anonymous · helps us improve
+  <div class="container">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="brand">
+        <span class="brand__mark">SA</span>
+        <span>Site Audit Tool</span>
+      </div>
+      <span class="badge-status">No login required · Data stays on your device</span>
     </div>
 
-    <form id="auditForm" novalidate>
-      <div class="grid">
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero__eyebrow">Feedback Form</div>
+      <h1>Site Audit Feedback</h1>
+      <p>Help us evaluate the new audit submission process. Your answers stay on your device and are only shared when you export the PDF.</p>
 
-        <!-- 1 -->
-        <div class="card">
-          <div class="label-row">
-            <span class="q-num">1</span>
-            <span class="q-text">Roughly how many people on the team are using the form?</span>
-          </div>
-          <input type="number" name="teamCount" placeholder="e.g. 8" min="1" step="1" />
-          <div class="hint">number</div>
+      <div class="hero__meta">
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span>Takes about 3 minutes</span>
         </div>
-
-        <!-- 2 -->
-        <div class="card">
-          <div class="label-row">
-            <span class="q-num">2</span>
-            <span class="q-text">How many audit entries submitted this week?</span>
-            <span class="counter-badge">=COUNTA()</span>
-          </div>
-          <input type="text" name="auditEntriesWeek" placeholder="e.g. 24 or =COUNTA()" />
-          <div class="hint">feel free to paste the formula result</div>
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>Data stays on your device</span>
         </div>
-
-        <!-- 3 -->
-        <div class="card">
-          <div class="label-row">
-            <span class="q-num">3</span>
-            <span class="q-text">Errors / stuck while submitting?</span>
-          </div>
-          <select name="submissionErrors">
-            <option value="" disabled selected>— how often? —</option>
-            <option value="Never">🟢 Never</option>
-            <option value="Rarely (once or twice)">🟡 Rarely (once or twice)</option>
-            <option value="Sometimes (weekly)">🟠 Sometimes (weekly)</option>
-            <option value="Often (every few submissions)">🔴 Often (every few submissions)</option>
-          </select>
-          <input type="text" name="errorDetails" placeholder="optional details" />
+        <div class="meta-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+          </svg>
+          <span>Exports as PDF</span>
         </div>
+      </div>
+    </header>
 
-        <!-- 4 -->
-        <div class="card full-width">
-          <div class="label-row">
-            <span class="q-num">4</span>
-            <span class="q-text">Before this form, how did you usually record a site audit?</span>
-            <span class="hint">ask ≥2 people</span>
+    <!-- Progress -->
+    <div class="progress">
+      <span>Progress</span>
+      <div class="progress__bar"><div class="progress__fill" id="progressFill"></div></div>
+      <span class="progress__count" id="progressCount">0%</span>
+    </div>
+
+    <!-- Form -->
+    <form id="auditForm" class="form-card" novalidate autocomplete="off">
+      <div class="form-card__body">
+
+        <!-- Section: Team & Volume -->
+        <div class="section-label">Team &amp; Volume</div>
+
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">1</span>
+            <label class="field-label" for="teamCount">How many people on the team use this form?</label>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
-            <div class="inline-group">
-              <span class="persona-tag"><i>👤</i> First person</span>
-              <input type="text" name="oldMethodFirst" placeholder="WhatsApp, paper, Excel later…" style="flex:1;" />
-            </div>
-            <div class="inline-group">
-              <span class="persona-tag"><i>👤</i> Second person</span>
-              <input type="text" name="oldMethodSecond" placeholder="their answer" style="flex:1;" />
-            </div>
+          <div class="field-hint">Enter a number</div>
+          <div class="input-wrap">
+            <input type="number" id="teamCount" name="teamCount" min="1" step="1" placeholder="e.g. 8" />
           </div>
         </div>
 
-        <!-- 5 -->
-        <div class="card full-width">
-          <div class="label-row">
-            <span class="q-num">5</span>
-            <span class="q-text">Old way: time per site (finish audit → data in tracker)</span>
-            <span class="hint">ask ≥2 people</span>
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">2</span>
+            <label class="field-label" for="auditEntriesWeek">How many audit entries were submitted this week?</label>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
-            <div class="inline-group">
-              <span class="persona-tag"><i>👤</i> First person</span>
-              <input type="text" name="oldTimeFirst" placeholder="e.g. ~15 min" style="flex:1;" />
-            </div>
-            <div class="inline-group">
-              <span class="persona-tag"><i>👤</i> Second person</span>
-              <input type="text" name="oldTimeSecond" placeholder="their answer" style="flex:1;" />
-            </div>
+          <div class="field-hint">Paste the COUNTA() result if available</div>
+          <div class="input-wrap">
+            <input type="text" id="auditEntriesWeek" name="auditEntriesWeek" placeholder="e.g. 24" />
           </div>
         </div>
 
-        <!-- 6 -->
-        <div class="card">
-          <div class="label-row">
-            <span class="q-num">6</span>
-            <span class="q-text">How long does it take now, using the form?</span>
-            <span class="hint">per site</span>
-          </div>
-          <input type="text" name="newTimePerSite" placeholder="e.g. ~4 min" />
-        </div>
+        <!-- Section: Reliability -->
+        <div class="section-label">Reliability</div>
 
-        <!-- 7 -->
-        <div class="card full-width">
-          <div class="label-row">
-            <span class="q-num">7</span>
-            <span class="q-text">Lost / forgot details with old method?</span>
-            <span class="hint">(illegible, missed notes) ask ≥2 people</span>
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">3</span>
+            <label class="field-label" for="submissionErrors">How often do you encounter errors or get stuck while submitting?</label>
           </div>
-          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
-            <div class="inline-group">
-              <span class="persona-tag"><i>👤</i> First person</span>
-              <input type="text" name="lostDetailsFirst" placeholder="their answer" style="flex:1;" />
-            </div>
-            <div class="inline-group">
-              <span class="persona-tag"><i>👤</i> Second person</span>
-              <input type="text" name="lostDetailsSecond" placeholder="their answer" style="flex:1;" />
+          <div class="field-hint">Select the closest frequency</div>
+          <div class="input-wrap">
+            <select id="submissionErrors" name="submissionErrors">
+              <option value="" disabled selected>Select frequency</option>
+              <option value="Never">Never</option>
+              <option value="Rarely (once or twice)">Rarely (once or twice)</option>
+              <option value="Sometimes (weekly)">Sometimes (weekly)</option>
+              <option value="Often (every few submissions)">Often (every few submissions)</option>
+            </select>
+            <div style="margin-top: 10px;">
+              <input type="text" name="errorDetails" placeholder="Optional: describe the error" />
             </div>
           </div>
         </div>
 
-        <!-- 8 -->
-        <div class="card">
-          <div class="label-row">
-            <span class="q-num">8</span>
-            <span class="q-text">Easier to fill on phone at the site, compared to before?</span>
+        <!-- Section: Process Comparison -->
+        <div class="section-label">Process Comparison</div>
+
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">4</span>
+            <label class="field-label">Before this form, how did you usually record a site audit?</label>
           </div>
-          <input type="text" name="easierOnPhone" placeholder="e.g. much easier, yes" />
+          <div class="field-hint">Ask at least two team members</div>
+          <div class="input-wrap">
+            <div class="sub-fields">
+              <div class="sub-field">
+                <label class="sub-field__label" for="oldMethodFirst">First person</label>
+                <input type="text" id="oldMethodFirst" name="oldMethodFirst" placeholder="e.g. WhatsApp, paper, Excel" />
+              </div>
+              <div class="sub-field">
+                <label class="sub-field__label" for="oldMethodSecond">Second person</label>
+                <input type="text" id="oldMethodSecond" name="oldMethodSecond" placeholder="Their answer" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- 9 -->
-        <div class="card">
-          <div class="label-row">
-            <span class="q-num">9</span>
-            <span class="q-text">Anything annoying or you'd want changed?</span>
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">5</span>
+            <label class="field-label">Old process: average time per site (audit completion to tracker entry)</label>
           </div>
-          <textarea name="annoyances" placeholder="share your thoughts..."></textarea>
+          <div class="field-hint">Ask at least two team members</div>
+          <div class="input-wrap">
+            <div class="sub-fields">
+              <div class="sub-field">
+                <label class="sub-field__label" for="oldTimeFirst">First person</label>
+                <input type="text" id="oldTimeFirst" name="oldTimeFirst" placeholder="e.g. 15 minutes" />
+              </div>
+              <div class="sub-field">
+                <label class="sub-field__label" for="oldTimeSecond">Second person</label>
+                <input type="text" id="oldTimeSecond" name="oldTimeSecond" placeholder="Their answer" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- 10 -->
-        <div class="card">
-          <div class="label-row">
-            <span class="q-num">10</span>
-            <span class="q-text">Would you say: saves time, no difference, or slower?</span>
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">6</span>
+            <label class="field-label" for="newTimePerSite">Current process: average time per site using this form</label>
           </div>
-          <select name="timeImpact">
-            <option value="" disabled selected>— choose one —</option>
-            <option value="Saves time">⏩ saves time</option>
-            <option value="No difference">➖ no difference</option>
-            <option value="Slower">🐢 slower</option>
-          </select>
-          <input type="text" name="timeImpactComment" placeholder="optional comment" />
+          <div class="input-wrap">
+            <input type="text" id="newTimePerSite" name="newTimePerSite" placeholder="e.g. 4 minutes" />
+          </div>
         </div>
 
-        <!-- 11 -->
-        <div class="card full-width">
-          <div class="label-row">
-            <span class="q-num">11</span>
-            <span class="q-text">One honest sentence about how it's working for the team</span>
-            <span class="hint">can quote</span>
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">7</span>
+            <label class="field-label">With the old method, were details ever lost or forgotten?</label>
           </div>
-          <textarea name="honestSentence" placeholder="e.g. It's cut my admin in half."></textarea>
-          <div class="muted" style="display: flex; gap: 0.5rem; align-items: center;">💭 feel free to be candid</div>
+          <div class="field-hint">Illegible notes, missed items, etc. Ask at least two team members</div>
+          <div class="input-wrap">
+            <div class="sub-fields">
+              <div class="sub-field">
+                <label class="sub-field__label" for="lostDetailsFirst">First person</label>
+                <input type="text" id="lostDetailsFirst" name="lostDetailsFirst" placeholder="Their answer" />
+              </div>
+              <div class="sub-field">
+                <label class="sub-field__label" for="lostDetailsSecond">Second person</label>
+                <input type="text" id="lostDetailsSecond" name="lostDetailsSecond" placeholder="Their answer" />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- Additional -->
-        <div class="card full-width">
-          <div class="label-row">
-            <span class="q-num" style="background: linear-gradient(135deg, #5fc3ff, #7f7bff);">+</span>
-            <span class="q-text">Additional thoughts</span>
-            <span class="hint">anything else you want to share</span>
+        <!-- Section: Experience -->
+        <div class="section-label">Experience</div>
+
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">8</span>
+            <label class="field-label" for="easierOnPhone">Is it easier to fill out this form on a phone at the site, compared to the previous method?</label>
           </div>
-          <textarea name="additionalThoughts" placeholder="Any extra feedback, context, or things I should know..."></textarea>
-          <div class="muted" style="display: flex; justify-content: flex-end;">✨ all feedback welcome</div>
+          <div class="input-wrap">
+            <input type="text" id="easierOnPhone" name="easierOnPhone" placeholder="e.g. Yes, significantly easier" />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">9</span>
+            <label class="field-label" for="annoyances">Is anything annoying or would you change something?</label>
+          </div>
+          <div class="input-wrap">
+            <textarea id="annoyances" name="annoyances" placeholder="Describe any issues or suggestions"></textarea>
+          </div>
+        </div>
+
+        <!-- Section: Impact -->
+        <div class="section-label">Impact</div>
+
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">10</span>
+            <label class="field-label" for="timeImpact">Overall, would you say this form saves time, makes no difference, or is slower?</label>
+          </div>
+          <div class="input-wrap">
+            <select id="timeImpact" name="timeImpact">
+              <option value="" disabled selected>Select one</option>
+              <option value="Saves time">Saves time</option>
+              <option value="No difference">No difference</option>
+              <option value="Slower">Slower</option>
+            </select>
+            <div style="margin-top: 10px;">
+              <input type="text" name="timeImpactComment" placeholder="Optional comment" />
+            </div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">11</span>
+            <label class="field-label" for="honestSentence">In one sentence, how is this working for the team?</label>
+          </div>
+          <div class="field-hint">Your response may be quoted anonymously</div>
+          <div class="input-wrap">
+            <textarea id="honestSentence" name="honestSentence" placeholder="Your honest one-liner"></textarea>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <div class="field-group__head">
+            <span class="field-num">+</span>
+            <label class="field-label" for="additionalThoughts">Additional thoughts</label>
+          </div>
+          <div class="field-hint">Anything else you want to share</div>
+          <div class="input-wrap">
+            <textarea id="additionalThoughts" name="additionalThoughts" placeholder="Optional"></textarea>
+          </div>
         </div>
 
       </div>
 
-      <div class="footer-actions">
-        <div style="display: flex; align-items: center; gap: 0.8rem;">
-          <span style="font-size: 1.4rem;">✨</span>
-          <span style="font-weight: 500; color: #2d3b4f; font-size: 0.95rem;">ready when you are</span>
-        </div>
-        <div class="action-buttons">
+      <!-- Actions -->
+      <div class="form-actions">
+        <div class="form-actions__note">No login. No tracking. Data stays in your browser.</div>
+        <div class="form-actions__buttons">
           <button type="button" class="btn btn-secondary" id="showAnswersBtn">
-            ✨ Show answers
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+            Preview
           </button>
           <button type="button" class="btn btn-primary" id="downloadPdfBtn">
-            <span class="pdf-icon">📄</span> Download PDF
-            <span style="font-size: 1.1rem;">⬇️</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Download PDF
           </button>
         </div>
       </div>
     </form>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <!-- jsPDF library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
   <script>
-    (function() {
-      const form = document.getElementById('auditForm');
+    (function () {
+      'use strict';
+
+      const form  = document.getElementById('auditForm');
       const toast = document.getElementById('toast');
+      const progressFill  = document.getElementById('progressFill');
+      const progressCount = document.getElementById('progressCount');
 
-      function showToast(message, type = 'success') {
-        toast.textContent = message;
-        toast.className = 'toast show ' + type;
-        setTimeout(() => {
-          toast.className = 'toast ' + type;
-        }, 2600);
-      }
-
-      // ---------- Field metadata ----------
-      // Each entry: { key, label, isMultiline? }
       const FIELDS = [
-        { key: 'teamCount',           label: '1. Team members using the form' },
-        { key: 'auditEntriesWeek',    label: '2. Audit entries submitted this week (=COUNTA)' },
-        { key: 'submissionErrors',    label: '3a. Errors / stuck — how often?' },
-        { key: 'errorDetails',        label: '3b. Error details (optional)' },
-        { key: 'oldMethodFirst',      label: '4. Old method — first person' },
-        { key: 'oldMethodSecond',     label: '4. Old method — second person' },
-        { key: 'oldTimeFirst',        label: '5. Old time per site — first person' },
-        { key: 'oldTimeSecond',       label: '5. Old time per site — second person' },
-        { key: 'newTimePerSite',      label: '6. New time per site (using form)' },
-        { key: 'lostDetailsFirst',    label: '7. Lost/forgot details — first person' },
-        { key: 'lostDetailsSecond',   label: '7. Lost/forgot details — second person' },
-        { key: 'easierOnPhone',       label: '8. Easier to fill on phone?' },
-        { key: 'annoyances',          label: '9. Annoying / would change', isMultiline: true },
-        { key: 'timeImpact',          label: '10a. Time impact verdict' },
-        { key: 'timeImpactComment',   label: '10b. Time impact comment' },
-        { key: 'honestSentence',      label: '11. One honest sentence', isMultiline: true },
-        { key: 'additionalThoughts',  label: 'Additional thoughts', isMultiline: true }
+        { key: 'teamCount',         label: '1. Team members using the form' },
+        { key: 'auditEntriesWeek',  label: '2. Audit entries submitted this week' },
+        { key: 'submissionErrors',  label: '3a. Errors / stuck — frequency' },
+        { key: 'errorDetails',      label: '3b. Error details' },
+        { key: 'oldMethodFirst',    label: '4. Old method — first person' },
+        { key: 'oldMethodSecond',   label: '4. Old method — second person' },
+        { key: 'oldTimeFirst',      label: '5. Old time per site — first person' },
+        { key: 'oldTimeSecond',     label: '5. Old time per site — second person' },
+        { key: 'newTimePerSite',    label: '6. Current time per site' },
+        { key: 'lostDetailsFirst',  label: '7. Lost / forgotten details — first person' },
+        { key: 'lostDetailsSecond', label: '7. Lost / forgotten details — second person' },
+        { key: 'easierOnPhone',     label: '8. Easier to fill on phone?' },
+        { key: 'annoyances',        label: '9. Issues / suggestions', multiline: true },
+        { key: 'timeImpact',        label: '10a. Time impact verdict' },
+        { key: 'timeImpactComment', label: '10b. Time impact comment' },
+        { key: 'honestSentence',    label: '11. One-sentence summary', multiline: true },
+        { key: 'additionalThoughts',label: 'Additional thoughts', multiline: true }
       ];
 
-      // ---------- Collect form values ----------
-      function collectAnswers() {
-        const answers = {};
-        FIELDS.forEach(f => {
+      // ---- Progress ----
+      function updateProgress() {
+        let filled = 0;
+        FIELDS.forEach(function (f) {
           const el = form.elements[f.key];
-          let value = '';
-          if (el) {
-            value = (el.value || '').trim();
-          }
-          answers[f.key] = value || '—';
+          if (el && el.value && el.value.trim() !== '') filled++;
         });
-        return answers;
+        const pct = Math.round((filled / FIELDS.length) * 100);
+        progressFill.style.width = pct + '%';
+        progressCount.textContent = pct + '%';
       }
 
-      // ---------- SHOW ANSWERS ----------
-      document.getElementById('showAnswersBtn').addEventListener('click', function() {
-        const answers = collectAnswers();
-        let output = '✨ Your answers ✨\n\n';
-        FIELDS.forEach(f => {
-          output += `• ${f.label}:\n   ${answers[f.key]}\n\n`;
+      form.addEventListener('input', updateProgress);
+      form.addEventListener('change', updateProgress);
+      updateProgress();
+
+      // ---- Toast ----
+      function showToast(message, type) {
+        toast.textContent = message;
+        toast.className = 'toast is-visible' + (type ? ' toast--' + type : '');
+        clearTimeout(showToast._t);
+        showToast._t = setTimeout(function () {
+          toast.classList.remove('is-visible');
+        }, 3000);
+      }
+
+      // ---- Collect ----
+      function collectAnswers() {
+        const out = {};
+        FIELDS.forEach(function (f) {
+          const el = form.elements[f.key];
+          const val = el && typeof el.value === 'string' ? el.value.trim() : '';
+          out[f.key] = val || '—';
         });
-        alert(output);
+        return out;
+      }
+
+      // ---- Preview ----
+      document.getElementById('showAnswersBtn').addEventListener('click', function () {
+        const answers = collectAnswers();
+        let text = 'Form preview\n===========================\n\n';
+        FIELDS.forEach(function (f) {
+          text += f.label + '\n' + answers[f.key] + '\n\n';
+        });
+        alert(text);
       });
 
-      // ---------- DOWNLOAD PDF (real PDF) ----------
-      document.getElementById('downloadPdfBtn').addEventListener('click', function() {
-        // Check jsPDF loaded
+      // ---- PDF ----
+      document.getElementById('downloadPdfBtn').addEventListener('click', function () {
         if (!window.jspdf || !window.jspdf.jsPDF) {
-          showToast('PDF library failed to load. Check internet.', 'error');
+          showToast('PDF library failed to load. Check your connection.', 'error');
           return;
         }
 
         const { jsPDF } = window.jspdf;
-        const doc = new jsPDF({
-          unit: 'pt',
-          format: 'a4',
-          orientation: 'portrait'
-        });
+        const doc = new jsPDF({ unit: 'pt', format: 'a4' });
 
-        const answers = collectAnswers();
+        const answers    = collectAnswers();
         const pageWidth  = doc.internal.pageSize.getWidth();
         const pageHeight = doc.internal.pageSize.getHeight();
-        const margin = 48;
-        const contentWidth = pageWidth - margin * 2;
-        let y = margin;
+        const margin     = 56;
+        const contentW   = pageWidth - margin * 2;
+        let   y          = margin;
 
-        // ---------- Header Banner ----------
-        doc.setFillColor(126, 94, 255); // purple
-        doc.rect(0, 0, pageWidth, 90, 'F');
+        // Header bar
+        doc.setFillColor(37, 99, 235);
+        doc.rect(0, 0, pageWidth, 6, 'F');
 
-        doc.setFillColor(79, 140, 255); // blue overlay
-        doc.rect(0, 0, pageWidth / 2, 90, 'F');
+        y = margin;
 
-        doc.setTextColor(255, 255, 255);
         doc.setFont('helvetica', 'bold');
-        doc.setFontSize(22);
-        doc.text('Site Audit Feedback', margin, 45);
+        doc.setFontSize(20);
+        doc.setTextColor(15, 23, 42);
+        doc.text('Site Audit Feedback', margin, y);
 
-        doc.setFont('helvetica', 'normal');
-        doc.setFontSize(11);
-        doc.text('Summary of team responses', margin, 68);
-
-        y = 130;
-
-        // ---------- Generated timestamp ----------
-        doc.setTextColor(120, 120, 140);
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'italic');
-        doc.text(
-          'Generated: ' + new Date().toLocaleString(),
-          margin,
-          y
-        );
         y += 24;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(10);
+        doc.setTextColor(100, 116, 139);
+        doc.text('Generated: ' + new Date().toLocaleString(), margin, y);
 
-        // Divider
-        doc.setDrawColor(220, 220, 240);
-        doc.setLineWidth(1);
-        doc.line(margin, y, pageWidth - margin, y);
         y += 20;
+        doc.setDrawColor(226, 232, 240);
+        doc.setLineWidth(0.8);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 26;
 
-        // ---------- Answers ----------
-        FIELDS.forEach((field, index) => {
-          const value = answers[field.key];
-          const isMultiline = field.isMultiline || value.length > 70;
+        // Fields
+        FIELDS.forEach(function (f, i) {
+          const value = answers[f.key];
 
-          // Estimate needed height for this block
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(11);
-          const labelLines = doc.splitTextToSize(field.label, contentWidth);
+          doc.setFontSize(10);
+          doc.setTextColor(37, 99, 235);
+          const labelLines = doc.splitTextToSize(f.label, contentW);
 
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(11);
-          const valueLines = doc.splitTextToSize(value, contentWidth - 12);
+          doc.setFontSize(10.5);
+          doc.setTextColor(30, 41, 59);
+          const valueLines = doc.splitTextToSize(value, contentW);
 
-          const blockHeight = (labelLines.length * 15) + (valueLines.length * 15) + 26;
+          const blockHeight = labelLines.length * 13 + valueLines.length * 14 + 22;
 
-          // Page break if needed
           if (y + blockHeight > pageHeight - margin) {
             doc.addPage();
             y = margin;
           }
 
-          // Question number badge (colored circle)
-          const badgeRadius = 10;
-          const badgeX = margin + badgeRadius;
-          const badgeY = y + 4;
-
-          doc.setFillColor(126, 94, 255);
-          doc.circle(badgeX, badgeY, badgeRadius, 'F');
-
-          doc.setTextColor(255, 255, 255);
           doc.setFont('helvetica', 'bold');
-          doc.setFontSize(9);
-          const numLabel = String(index + 1);
-          const numWidth = doc.getTextWidth(numLabel);
-          doc.text(numLabel, badgeX - numWidth / 2, badgeY + 3);
+          doc.setFontSize(10);
+          doc.setTextColor(37, 99, 235);
+          doc.text(labelLines, margin, y);
+          y += labelLines.length * 13 + 5;
 
-          // Label text
-          doc.setTextColor(30, 43, 60);
-          doc.setFont('helvetica', 'bold');
-          doc.setFontSize(11);
-          doc.text(labelLines, margin + 30, y + 8);
-          y += labelLines.length * 15 + 6;
-
-          // Value text
-          doc.setTextColor(60, 70, 90);
           doc.setFont('helvetica', 'normal');
-          doc.setFontSize(11);
-          doc.text(valueLines, margin + 30, y + 4);
-          y += valueLines.length * 15 + 14;
+          doc.setFontSize(10.5);
+          doc.setTextColor(30, 41, 59);
+          doc.text(valueLines, margin, y);
+          y += valueLines.length * 14 + 14;
 
-          // Light separator between entries
-          if (index < FIELDS.length - 1) {
-            doc.setDrawColor(240, 240, 250);
-            doc.setLineWidth(0.5);
-            doc.line(margin + 30, y - 4, pageWidth - margin, y - 4);
+          if (i < FIELDS.length - 1) {
+            doc.setDrawColor(241, 245, 249);
+            doc.setLineWidth(0.6);
+            doc.line(margin, y, pageWidth - margin, y);
+            y += 14;
           }
-
-          y += 6;
         });
 
-        // ---------- Footer on every page ----------
-        const totalPages = doc.internal.getNumberOfPages();
-        for (let p = 1; p <= totalPages; p++) {
+        // Footers
+        const total = doc.internal.getNumberOfPages();
+        for (let p = 1; p <= total; p++) {
           doc.setPage(p);
-          doc.setFont('helvetica', 'italic');
+          doc.setFont('helvetica', 'normal');
           doc.setFontSize(9);
-          doc.setTextColor(150, 150, 170);
+          doc.setTextColor(148, 163, 184);
           doc.text(
-            `Page ${p} of ${totalPages}   ·   Thank you! 💜`,
+            'Page ' + p + ' of ' + total,
             pageWidth / 2,
-            pageHeight - 24,
+            pageHeight - 28,
             { align: 'center' }
           );
         }
 
-        // ---------- Save ----------
-        const filename = 'site_audit_feedback_' +
+        const filename = 'site-audit-feedback-' +
           new Date().toISOString().slice(0, 10) + '.pdf';
         doc.save(filename);
-        showToast('✅ PDF downloaded: ' + filename, 'success');
+        showToast('PDF downloaded successfully.', 'success');
       });
     })();
   </script>
