@@ -1,651 +1,826 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
-  <title>✨ Site Audit Form · Feedback</title>
-  <!-- html2pdf library (CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+  <title>✨ Team Audit Feedback · Colorful Form</title>
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', 'Segoe UI', Roboto, system-ui, sans-serif;
     }
 
     body {
       min-height: 100vh;
-      background: linear-gradient(145deg, #f9f0ff 0%, #ffe9f4 100%);
+      background: linear-gradient(145deg, #f9f0ff 0%, #e5f4ff 100%);
       display: flex;
+      align-items: center;
       justify-content: center;
-      align-items: flex-start;
-      padding: 1rem 0.8rem;
+      padding: 1rem 0.75rem;
     }
 
-    .card {
-      max-width: 820px;
+    .form-container {
+      max-width: 1100px;
       width: 100%;
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 40px;
-      padding: 1.8rem 1.5rem;
-      box-shadow: 0 30px 60px rgba(196, 113, 245, 0.20), 0 12px 30px rgba(255, 140, 200, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.7);
-      transition: 0.25s ease;
-      margin: 0.5rem 0;
-    }
-
-    @media (max-width: 480px) {
-      .card {
-        padding: 1.2rem 1rem;
-        border-radius: 28px;
-      }
+      border-radius: 2.5rem;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.08), 0 10px 20px rgba(0, 0, 0, 0.03), inset 0 0 0 1px rgba(255, 255, 255, 0.9);
+      padding: 2rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      transition: all 0.2s ease;
     }
 
     h1 {
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
-      background: linear-gradient(135deg, #b35cf7, #ff6b9d);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      letter-spacing: -0.02em;
+      color: #1e2b3c;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      margin-bottom: 0.25rem;
+      letter-spacing: -0.02em;
       flex-wrap: wrap;
     }
 
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.5rem;
-      }
+    h1 span {
+      background: linear-gradient(135deg, #b45eff, #5f9bff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .subhead {
       font-size: 0.95rem;
-      color: #6b4a7a;
-      margin-top: 0.3rem;
-      margin-bottom: 1.5rem;
-      border-left: 4px solid #d9b0ff;
+      color: #4a5b6e;
+      margin-bottom: 2rem;
+      border-left: 6px solid #b45eff;
       padding-left: 1rem;
-      background: rgba(255, 220, 240, 0.3);
-      border-radius: 0 16px 16px 0;
+      font-weight: 400;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 0 100px 100px 0;
       line-height: 1.4;
-      font-weight: 450;
     }
 
-    @media (max-width: 480px) {
-      .subhead {
-        font-size: 0.85rem;
-        padding-left: 0.8rem;
-      }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem 1.5rem;
     }
 
-    .date-badge {
-      background: #ffffffcc;
-      backdrop-filter: blur(4px);
-      padding: 0.3rem 1rem;
-      border-radius: 40px;
-      display: inline-block;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: #471f5a;
-      border: 1px solid #e7d0f5;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 10px rgba(190, 130, 230, 0.08);
-      width: 100%;
-      text-align: center;
+    .full-width {
+      grid-column: 1 / -1;
     }
 
-    @media (max-width: 480px) {
-      .date-badge {
-        font-size: 0.75rem;
-        padding: 0.25rem 0.8rem;
-      }
+    .card {
+      background: white;
+      border-radius: 1.5rem;
+      padding: 1.25rem 1.25rem;
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.03), 0 2px 6px rgba(0, 0, 0, 0.02);
+      border: 1px solid #ffffff;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
     }
 
-    .question-block {
-      background: rgba(255, 245, 250, 0.6);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-      border-radius: 24px;
-      padding: 1.2rem 1.2rem;
-      margin-bottom: 1.2rem;
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      transition: 0.2s;
-      box-shadow: 0 6px 18px rgba(210, 150, 255, 0.06);
+    .card:hover {
+      box-shadow: 0 18px 28px -8px rgba(104, 76, 255, 0.12), 0 4px 12px rgba(0, 0, 0, 0.02);
+      border-color: #eae0ff;
     }
 
-    @media (max-width: 480px) {
-      .question-block {
-        padding: 1rem 0.9rem;
-        border-radius: 20px;
-        margin-bottom: 0.9rem;
-      }
-    }
-
-    .question-block:hover {
-      background: rgba(255, 245, 250, 0.8);
-      border-color: #f6d0ff;
-    }
-
-    .q-label {
+    .label-row {
       display: flex;
       align-items: baseline;
       gap: 0.5rem;
       flex-wrap: wrap;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #2d143b;
-      margin-bottom: 0.7rem;
     }
 
-    @media (max-width: 480px) {
-      .q-label {
-        font-size: 0.9rem;
-        gap: 0.4rem;
-      }
-    }
-
-    .q-number {
-      background: #b084d9;
-      color: white;
-      width: 26px;
-      height: 26px;
-      border-radius: 30px;
+    .q-num {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.8rem;
+      background: linear-gradient(135deg, #b45eff, #6d8cff);
+      color: white;
       font-weight: 700;
+      font-size: 0.8rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 50%;
+      box-shadow: 0 4px 8px rgba(106, 76, 255, 0.25);
       flex-shrink: 0;
     }
 
-    .q-hint {
-      font-weight: 400;
-      font-size: 0.75rem;
-      color: #7b5b8b;
-      background: #efe2f8;
-      padding: 0.15rem 0.8rem;
-      border-radius: 30px;
-      margin-left: 0.1rem;
+    .q-text {
+      font-weight: 600;
+      font-size: 0.98rem;
+      color: #1d2b3a;
+      line-height: 1.4;
     }
 
-    .q-note {
-      font-size: 0.75rem;
-      color: #b484cf;
-      background: #f3e6fc;
-      padding: 0.15rem 0.8rem;
-      border-radius: 40px;
+    .hint {
+      font-size: 0.78rem;
+      color: #718096;
+      font-style: italic;
+      background: #f3f6fe;
+      padding: 0.15rem 0.65rem;
+      border-radius: 30px;
+      display: inline-block;
       font-weight: 400;
+      border: 1px solid #e0e7ff;
     }
 
     input, textarea, select {
       width: 100%;
       padding: 0.8rem 1rem;
-      border: 1.5px solid #eed7fc;
-      border-radius: 30px;
-      font-size: 1rem;
-      background: white;
-      transition: 0.15s ease;
-      color: #1f0d29;
-      box-shadow: inset 0 2px 6px rgba(0,0,0,0.01);
+      border: 2px solid #e9edf5;
+      border-radius: 1.25rem;
+      font-size: 0.95rem;
+      background: #fbfdff;
+      transition: all 0.2s;
+      color: #111;
+      font-weight: 500;
+      outline: none;
+      resize: vertical;
       -webkit-appearance: none;
       appearance: none;
+      font-family: inherit;
     }
 
-    @media (max-width: 480px) {
-      input, textarea, select {
-        padding: 0.7rem 0.9rem;
-        font-size: 0.95rem;
-        border-radius: 24px;
-      }
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7a8e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem;
     }
 
     input:focus, textarea:focus, select:focus {
-      outline: none;
-      border-color: #b87be0;
-      box-shadow: 0 0 0 4px #dec5f5, inset 0 0 0 1px #b87be0;
+      border-color: #a47eff;
+      background: white;
+      box-shadow: 0 0 0 5px rgba(164, 126, 255, 0.15);
     }
 
     textarea {
-      border-radius: 24px;
-      resize: vertical;
-      min-height: 60px;
+      min-height: 85px;
     }
 
-    @media (max-width: 480px) {
-      textarea {
-        min-height: 50px;
-        border-radius: 20px;
-      }
+    .inline-group {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      align-items: center;
     }
 
-    .btn-group {
+    .persona-tag {
+      background: #f1f4ff;
+      border-radius: 30px;
+      padding: 0.2rem 0.8rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #3b4b7a;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      border: 1px solid #d2defc;
+      white-space: nowrap;
+    }
+
+    .persona-tag i {
+      font-style: normal;
+      font-size: 1rem;
+    }
+
+    .footer-actions {
+      margin-top: 2rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 0.8rem;
-      margin-top: 1rem;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 2.5rem;
+      padding: 0.8rem 1rem 0.8rem 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(8px);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: stretch;
     }
 
     .btn {
-      background: linear-gradient(135deg, #b45cf7, #e46aae);
       border: none;
-      padding: 0.9rem 1.5rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      color: white;
-      letter-spacing: 0.3px;
-      box-shadow: 0 12px 28px rgba(192, 90, 240, 0.3);
-      cursor: pointer;
-      transition: all 0.2s;
-      flex: 1;
-      min-width: 150px;
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      display: flex;
+      padding: 0.8rem 1.25rem;
+      border-radius: 2rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
-      -webkit-tap-highlight-color: transparent;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: white;
+      color: #1e2b3c;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.03);
+      border: 1px solid #ffffff;
+      letter-spacing: -0.01em;
+      flex: 1 1 auto;
+      white-space: nowrap;
     }
 
-    @media (max-width: 480px) {
-      .btn {
-        padding: 0.8rem 1.2rem;
-        font-size: 1rem;
-        min-width: 120px;
-        border-radius: 40px;
-      }
+    .btn-primary {
+      background: linear-gradient(135deg, #7e5eff, #4f8cff);
+      color: white;
+      box-shadow: 0 14px 24px -8px #7e5eff80, 0 4px 10px rgba(0, 0, 0, 0.05);
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(135deg, #6a44ff, #3a7aff);
+      transform: scale(1.02);
+      box-shadow: 0 18px 28px -6px #7e5effb3;
+    }
+
+    .btn-secondary {
+      background: white;
+      border: 1.5px solid #cfdfff;
+      color: #2f3e6b;
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: #f4f9ff;
+      border-color: #7e9eff;
     }
 
     .btn:active {
-      transform: scale(0.96);
+      transform: scale(0.98);
     }
 
-    .btn-pdf {
-      background: linear-gradient(135deg, #3a7bd5, #6b4bb8);
-      box-shadow: 0 12px 28px rgba(60, 90, 200, 0.3);
-    }
-
-    .btn-pdf:active {
-      transform: scale(0.96);
-    }
-
-    .answers-box {
-      margin-top: 1.8rem;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border-radius: 32px;
-      padding: 1.5rem 1.2rem;
-      border: 1px solid #f6e2ff;
-      box-shadow: 0 20px 40px rgba(150, 80, 200, 0.08);
-    }
-
-    @media (max-width: 480px) {
-      .answers-box {
-        padding: 1.2rem 1rem;
-        border-radius: 24px;
-        margin-top: 1.2rem;
-      }
-    }
-
-    .answers-box h3 {
+    .pdf-icon {
       font-size: 1.2rem;
-      font-weight: 600;
-      color: #381e47;
-      display: flex;
+    }
+
+    .counter-badge {
+      display: inline-flex;
       align-items: center;
-      gap: 0.7rem;
-      margin-bottom: 0.8rem;
-    }
-
-    @media (max-width: 480px) {
-      .answers-box h3 {
-        font-size: 1rem;
-      }
-    }
-
-    .answer-item {
-      background: white;
-      padding: 0.7rem 1rem;
+      justify-content: center;
+      background: #e6eeff;
+      color: #2e4b9e;
       border-radius: 30px;
-      margin-bottom: 0.5rem;
-      border-left: 4px solid #d9b3ff;
-      word-break: break-word;
-      box-shadow: 0 2px 8px rgba(200, 150, 255, 0.06);
-      font-size: 0.95rem;
+      padding: 0.15rem 0.75rem;
+      font-weight: 600;
+      font-size: 0.8rem;
     }
 
-    @media (max-width: 480px) {
-      .answer-item {
-        padding: 0.6rem 0.8rem;
+    .muted {
+      color: #6b7a8e;
+      font-size: 0.8rem;
+      font-weight: 400;
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e2b3c;
+      color: white;
+      padding: 0.85rem 1.5rem;
+      border-radius: 2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transition: all 0.35s ease;
+      z-index: 9999;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .toast.success {
+      background: linear-gradient(135deg, #7e5eff, #4f8cff);
+    }
+
+    .toast.error {
+      background: #e53e3e;
+    }
+
+    /* Mobile-first refinements */
+    @media (max-width: 640px) {
+      body {
+        padding: 0.75rem 0.5rem;
+        align-items: flex-start;
+      }
+
+      .form-container {
+        padding: 1.5rem 1rem;
+        border-radius: 1.75rem;
+      }
+
+      h1 {
+        font-size: 1.65rem;
+      }
+
+      .subhead {
         font-size: 0.85rem;
-        border-radius: 24px;
+        margin-bottom: 1.5rem;
+        padding-left: 0.85rem;
       }
-    }
 
-    .answer-item strong {
-      color: #642e82;
-    }
-
-    .footnote {
-      margin-top: 1.2rem;
-      font-size: 0.85rem;
-      color: #593d68;
-      background: #f3e5ff;
-      padding: 0.5rem 1rem;
-      border-radius: 40px;
-      display: inline-block;
-    }
-
-    @media (max-width: 480px) {
-      .footnote {
-        font-size: 0.75rem;
-        padding: 0.4rem 0.8rem;
-      }
-    }
-
-    .emoji-big {
-      font-size: 1.4rem;
-      line-height: 1;
-    }
-
-    hr {
-      margin: 1.5rem 0 0.8rem;
-      border: 1px dashed #ddc3f0;
-      opacity: 0.4;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.8rem;
-    }
-
-    @media (max-width: 550px) {
-      .two-col {
+      .grid {
         grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .card {
+        padding: 1rem 1rem;
+        border-radius: 1.25rem;
+      }
+
+      .q-num {
+        width: 1.6rem;
+        height: 1.6rem;
+        font-size: 0.75rem;
+      }
+
+      .q-text {
+        font-size: 0.92rem;
+      }
+
+      input, textarea, select {
+        padding: 0.75rem 0.9rem;
+        font-size: 0.9rem;
+        border-radius: 1.1rem;
+      }
+
+      .footer-actions {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0.9rem 1rem;
+        border-radius: 1.5rem;
+        gap: 0.8rem;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+        gap: 0.6rem;
+      }
+
+      .btn {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+        justify-content: center;
+        width: 100%;
+        white-space: normal;
+      }
+
+      .inline-group {
+        flex-direction: column;
+        align-items: stretch;
         gap: 0.5rem;
       }
-    }
 
-    .second-person-label {
-      background: #f0defa;
-      padding: 0.15rem 1rem;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      color: #4c2a5c;
-      display: inline-block;
-      margin-top: 0.5rem;
-      margin-bottom: 0.3rem;
-    }
+      .persona-tag {
+        align-self: flex-start;
+      }
 
-    @media (max-width: 480px) {
-      .second-person-label {
-        font-size: 0.7rem;
-        padding: 0.1rem 0.8rem;
+      .label-row {
+        gap: 0.4rem;
       }
     }
 
-    /* Additional thoughts special style */
-    .thoughts-block {
-      background: linear-gradient(135deg, rgba(255, 235, 250, 0.7), rgba(235, 220, 255, 0.7));
-      border: 2px solid #d9b3ff;
+    @media (max-width: 380px) {
+      .form-container {
+        padding: 1.25rem 0.8rem;
+      }
+      h1 {
+        font-size: 1.4rem;
+      }
+      .q-text {
+        font-size: 0.85rem;
+      }
     }
 
-    .thoughts-block .q-label {
-      color: #4a1f5e;
+    ::-webkit-scrollbar {
+      width: 5px;
     }
-
-    /* PDF-specific: ensure background & colors print nicely */
-    @media print {
-      body { background: white; padding: 0.3in; }
-      .card { box-shadow: none; border: 1px solid #ddd; backdrop-filter: none; }
-      .btn-group { display: none; }
-      .question-block { break-inside: avoid; }
-      input, textarea { border-color: #ccc; }
-    }
-
-    /* Loading state for PDF button */
-    .btn-loading {
-      opacity: 0.7;
-      pointer-events: none;
+    ::-webkit-scrollbar-thumb {
+      background: #cbb9ff;
+      border-radius: 20px;
     }
   </style>
 </head>
 <body>
-  <div class="card" id="app">
-    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-      <h1>
-        <span class="emoji-big">🌸</span> Site audit form • Feedback
-      </h1>
-      <span style="font-size: 1.8rem;">💜</span>
-    </div>
+  <div class="form-container">
+    <h1>
+      <span>✨ Site Audit Form</span>
+      <span style="font-size: 1.8rem;">📋</span>
+    </h1>
     <div class="subhead">
-      ✦ 11 questions · honest &amp; quick · answers appear below ✦
-    </div>
-    <div class="date-badge">
-      📅 <span id="dateRangeDisplay">Aug 25–31, 2026</span>
-      <span style="margin: 0 0.5rem; opacity:0.7;">|</span>
-      <span>👥 ask Q4–Q7 to <strong>≥2 people</strong></span>
+      ⏱️ quick · anonymous · helps us improve
     </div>
 
-    <form id="auditForm" onsubmit="return false;">
-      <input type="hidden" id="dateRangeHidden" value="Aug 25–31, 2026" />
+    <form id="auditForm" novalidate>
+      <div class="grid">
 
-      <!-- Q1 -->
-      <div class="question-block">
-        <div class="q-label"><span class="q-number">1</span> Roughly how many people on the team are using the form? <span class="q-hint">number</span></div>
-        <input type="text" id="q1" placeholder="e.g. 4 people" />
-      </div>
-
-      <!-- Q2 -->
-      <div class="question-block">
-        <div class="q-label"><span class="q-number">2</span> How many audit entries submitted this week? <span class="q-hint">=COUNTA()</span></div>
-        <input type="text" id="q2" placeholder="e.g. 27" />
-      </div>
-
-      <!-- Q3 -->
-      <div class="question-block">
-        <div class="q-label"><span class="q-number">3</span> Errors / stuck while submitting? <span class="q-hint">how often?</span></div>
-        <input type="text" id="q3" placeholder="e.g. rarely, 2 times" />
-      </div>
-
-      <!-- Q4 + note: ask ≥2 people -->
-      <div class="question-block" style="border-left: 4px solid #bb7ad8;">
-        <div class="q-label"><span class="q-number">4</span> Before this form, how did you usually record a site audit? <span class="q-note">ask ≥2 people</span></div>
-        <textarea id="q4" rows="2" placeholder="WhatsApp, paper, Excel later… (first person)"></textarea>
-        <div style="margin-top: 0.5rem;">
-          <span class="second-person-label">👤 second person</span>
-          <input type="text" id="q4b" placeholder="second person's answer" style="margin-top:0.3rem;" />
+        <!-- 1 -->
+        <div class="card">
+          <div class="label-row">
+            <span class="q-num">1</span>
+            <span class="q-text">Roughly how many people on the team are using the form?</span>
+          </div>
+          <input type="number" name="teamCount" placeholder="e.g. 8" min="1" step="1" />
+          <div class="hint">number</div>
         </div>
-      </div>
 
-      <!-- Q5 + note -->
-      <div class="question-block" style="border-left: 4px solid #bb7ad8;">
-        <div class="q-label"><span class="q-number">5</span> Old way: time per site (finish audit → data in tracker) <span class="q-note">ask ≥2 people</span></div>
-        <input type="text" id="q5" placeholder="first person: e.g. ~15 min" />
-        <div style="margin-top: 0.5rem;">
-          <span class="second-person-label">👤 second person</span>
-          <input type="text" id="q5b" placeholder="second person's answer" style="margin-top:0.3rem;" />
+        <!-- 2 -->
+        <div class="card">
+          <div class="label-row">
+            <span class="q-num">2</span>
+            <span class="q-text">How many audit entries submitted this week?</span>
+            <span class="counter-badge">=COUNTA()</span>
+          </div>
+          <input type="text" name="auditEntriesWeek" placeholder="e.g. 24 or =COUNTA()" />
+          <div class="hint">feel free to paste the formula result</div>
         </div>
-      </div>
 
-      <!-- Q6 -->
-      <div class="question-block">
-        <div class="q-label"><span class="q-number">6</span> How long does it take now, using the form? <span class="q-hint">per site</span></div>
-        <input type="text" id="q6" placeholder="e.g. ~4 min" />
-      </div>
-
-      <!-- Q7 + note -->
-      <div class="question-block" style="border-left: 4px solid #bb7ad8;">
-        <div class="q-label"><span class="q-number">7</span> Lost / forgot details with old method? (illegible, missed notes) <span class="q-note">ask ≥2 people</span></div>
-        <input type="text" id="q7" placeholder="first person: e.g. yes, often" />
-        <div style="margin-top: 0.5rem;">
-          <span class="second-person-label">👤 second person</span>
-          <input type="text" id="q7b" placeholder="second person's answer" style="margin-top:0.3rem;" />
+        <!-- 3 -->
+        <div class="card">
+          <div class="label-row">
+            <span class="q-num">3</span>
+            <span class="q-text">Errors / stuck while submitting?</span>
+          </div>
+          <select name="submissionErrors">
+            <option value="" disabled selected>— how often? —</option>
+            <option value="Never">🟢 Never</option>
+            <option value="Rarely (once or twice)">🟡 Rarely (once or twice)</option>
+            <option value="Sometimes (weekly)">🟠 Sometimes (weekly)</option>
+            <option value="Often (every few submissions)">🔴 Often (every few submissions)</option>
+          </select>
+          <input type="text" name="errorDetails" placeholder="optional details" />
         </div>
-      </div>
 
-      <!-- Q8 -->
-      <div class="question-block">
-        <div class="q-label"><span class="q-number">8</span> Easier to fill on phone at the site, compared to before?</div>
-        <input type="text" id="q8" placeholder="e.g. much easier, yes" />
-      </div>
-
-      <!-- Q9 -->
-      <div class="question-block">
-        <div class="q-label"><span class="q-number">9</span> Anything annoying or you'd want changed?</div>
-        <input type="text" id="q9" placeholder="e.g. dropdowns could be bigger" />
-      </div>
-
-      <!-- Q10 -->
-      <div class="question-block">
-        <div class="q-label"><span class="q-number">10</span> Would you say: saves time, no difference, or slower?</div>
-        <input type="text" id="q10" placeholder="e.g. saves time" />
-      </div>
-
-      <!-- Q11 -->
-      <div class="question-block">
-        <div class="q-label"><span class="q-number">11</span> One honest sentence about how it's working for the team <span class="q-hint">can quote</span></div>
-        <input type="text" id="q11" placeholder="e.g. It's cut my admin in half." />
-      </div>
-
-      <!-- ✨ ADDITIONAL THOUGHTS -->
-      <div class="question-block thoughts-block">
-        <div class="q-label" style="gap: 0.8rem;">
-          <span style="background: #d9b3ff; color: white; width: 26px; height: 26px; border-radius: 30px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.85rem; font-weight: 700; flex-shrink: 0;">💭</span>
-          Additional thoughts <span class="q-hint" style="background: #e3c9f5;">anything else you want to share</span>
+        <!-- 4 -->
+        <div class="card full-width">
+          <div class="label-row">
+            <span class="q-num">4</span>
+            <span class="q-text">Before this form, how did you usually record a site audit?</span>
+            <span class="hint">ask ≥2 people</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div class="inline-group">
+              <span class="persona-tag"><i>👤</i> First person</span>
+              <input type="text" name="oldMethodFirst" placeholder="WhatsApp, paper, Excel later…" style="flex:1;" />
+            </div>
+            <div class="inline-group">
+              <span class="persona-tag"><i>👤</i> Second person</span>
+              <input type="text" name="oldMethodSecond" placeholder="their answer" style="flex:1;" />
+            </div>
+          </div>
         </div>
-        <textarea id="q12" rows="3" placeholder="Any extra feedback, context, or things I should know..."></textarea>
+
+        <!-- 5 -->
+        <div class="card full-width">
+          <div class="label-row">
+            <span class="q-num">5</span>
+            <span class="q-text">Old way: time per site (finish audit → data in tracker)</span>
+            <span class="hint">ask ≥2 people</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div class="inline-group">
+              <span class="persona-tag"><i>👤</i> First person</span>
+              <input type="text" name="oldTimeFirst" placeholder="e.g. ~15 min" style="flex:1;" />
+            </div>
+            <div class="inline-group">
+              <span class="persona-tag"><i>👤</i> Second person</span>
+              <input type="text" name="oldTimeSecond" placeholder="their answer" style="flex:1;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="card">
+          <div class="label-row">
+            <span class="q-num">6</span>
+            <span class="q-text">How long does it take now, using the form?</span>
+            <span class="hint">per site</span>
+          </div>
+          <input type="text" name="newTimePerSite" placeholder="e.g. ~4 min" />
+        </div>
+
+        <!-- 7 -->
+        <div class="card full-width">
+          <div class="label-row">
+            <span class="q-num">7</span>
+            <span class="q-text">Lost / forgot details with old method?</span>
+            <span class="hint">(illegible, missed notes) ask ≥2 people</span>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <div class="inline-group">
+              <span class="persona-tag"><i>👤</i> First person</span>
+              <input type="text" name="lostDetailsFirst" placeholder="their answer" style="flex:1;" />
+            </div>
+            <div class="inline-group">
+              <span class="persona-tag"><i>👤</i> Second person</span>
+              <input type="text" name="lostDetailsSecond" placeholder="their answer" style="flex:1;" />
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 -->
+        <div class="card">
+          <div class="label-row">
+            <span class="q-num">8</span>
+            <span class="q-text">Easier to fill on phone at the site, compared to before?</span>
+          </div>
+          <input type="text" name="easierOnPhone" placeholder="e.g. much easier, yes" />
+        </div>
+
+        <!-- 9 -->
+        <div class="card">
+          <div class="label-row">
+            <span class="q-num">9</span>
+            <span class="q-text">Anything annoying or you'd want changed?</span>
+          </div>
+          <textarea name="annoyances" placeholder="share your thoughts..."></textarea>
+        </div>
+
+        <!-- 10 -->
+        <div class="card">
+          <div class="label-row">
+            <span class="q-num">10</span>
+            <span class="q-text">Would you say: saves time, no difference, or slower?</span>
+          </div>
+          <select name="timeImpact">
+            <option value="" disabled selected>— choose one —</option>
+            <option value="Saves time">⏩ saves time</option>
+            <option value="No difference">➖ no difference</option>
+            <option value="Slower">🐢 slower</option>
+          </select>
+          <input type="text" name="timeImpactComment" placeholder="optional comment" />
+        </div>
+
+        <!-- 11 -->
+        <div class="card full-width">
+          <div class="label-row">
+            <span class="q-num">11</span>
+            <span class="q-text">One honest sentence about how it's working for the team</span>
+            <span class="hint">can quote</span>
+          </div>
+          <textarea name="honestSentence" placeholder="e.g. It's cut my admin in half."></textarea>
+          <div class="muted" style="display: flex; gap: 0.5rem; align-items: center;">💭 feel free to be candid</div>
+        </div>
+
+        <!-- Additional -->
+        <div class="card full-width">
+          <div class="label-row">
+            <span class="q-num" style="background: linear-gradient(135deg, #5fc3ff, #7f7bff);">+</span>
+            <span class="q-text">Additional thoughts</span>
+            <span class="hint">anything else you want to share</span>
+          </div>
+          <textarea name="additionalThoughts" placeholder="Any extra feedback, context, or things I should know..."></textarea>
+          <div class="muted" style="display: flex; justify-content: flex-end;">✨ all feedback welcome</div>
+        </div>
+
       </div>
 
-      <div class="btn-group">
-        <button type="button" class="btn" id="submitBtn">
-          <span>✨</span> Show answers <span>✨</span>
-        </button>
-        <button type="button" class="btn btn-pdf" id="pdfBtn">
-          <span>📄</span> Download PDF <span>⬇️</span>
-        </button>
+      <div class="footer-actions">
+        <div style="display: flex; align-items: center; gap: 0.8rem;">
+          <span style="font-size: 1.4rem;">✨</span>
+          <span style="font-weight: 500; color: #2d3b4f; font-size: 0.95rem;">ready when you are</span>
+        </div>
+        <div class="action-buttons">
+          <button type="button" class="btn btn-secondary" id="showAnswersBtn">
+            ✨ Show answers
+          </button>
+          <button type="button" class="btn btn-primary" id="downloadPdfBtn">
+            <span class="pdf-icon">📄</span> Download PDF
+            <span style="font-size: 1.1rem;">⬇️</span>
+          </button>
+        </div>
       </div>
     </form>
-
-    <!-- answers will appear here -->
-    <div id="answersContainer" class="answers-box" style="display: none;">
-      <h3>📋 Your answers</h3>
-      <div id="answersList"></div>
-      <div class="footnote">
-        ⚡ copy any answer — date range: <span id="shownDateRange">Aug 25–31, 2026</span>
-      </div>
-    </div>
   </div>
+
+  <div class="toast" id="toast"></div>
+
+  <!-- jsPDF library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script>
     (function() {
-      // --- set date range (today's week) ---
-      function getCurrentWeekRange() {
-        const now = new Date();
-        const day = now.getDay();
-        const diff = now.getDate() - day + (day === 0 ? -6 : 1);
-        const monday = new Date(now.setDate(diff));
-        const sunday = new Date(monday);
-        sunday.setDate(monday.getDate() + 6);
-        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-        const f = d => `${months[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
-        return `${f(monday)} – ${f(sunday)}`;
+      const form = document.getElementById('auditForm');
+      const toast = document.getElementById('toast');
+
+      function showToast(message, type = 'success') {
+        toast.textContent = message;
+        toast.className = 'toast show ' + type;
+        setTimeout(() => {
+          toast.className = 'toast ' + type;
+        }, 2600);
       }
 
-      const dateRange = getCurrentWeekRange();
-      document.getElementById('dateRangeDisplay').textContent = dateRange;
-      document.getElementById('dateRangeHidden').value = dateRange;
-      document.getElementById('shownDateRange').textContent = dateRange;
+      // ---------- Field metadata ----------
+      // Each entry: { key, label, isMultiline? }
+      const FIELDS = [
+        { key: 'teamCount',           label: '1. Team members using the form' },
+        { key: 'auditEntriesWeek',    label: '2. Audit entries submitted this week (=COUNTA)' },
+        { key: 'submissionErrors',    label: '3a. Errors / stuck — how often?' },
+        { key: 'errorDetails',        label: '3b. Error details (optional)' },
+        { key: 'oldMethodFirst',      label: '4. Old method — first person' },
+        { key: 'oldMethodSecond',     label: '4. Old method — second person' },
+        { key: 'oldTimeFirst',        label: '5. Old time per site — first person' },
+        { key: 'oldTimeSecond',       label: '5. Old time per site — second person' },
+        { key: 'newTimePerSite',      label: '6. New time per site (using form)' },
+        { key: 'lostDetailsFirst',    label: '7. Lost/forgot details — first person' },
+        { key: 'lostDetailsSecond',   label: '7. Lost/forgot details — second person' },
+        { key: 'easierOnPhone',       label: '8. Easier to fill on phone?' },
+        { key: 'annoyances',          label: '9. Annoying / would change', isMultiline: true },
+        { key: 'timeImpact',          label: '10a. Time impact verdict' },
+        { key: 'timeImpactComment',   label: '10b. Time impact comment' },
+        { key: 'honestSentence',      label: '11. One honest sentence', isMultiline: true },
+        { key: 'additionalThoughts',  label: 'Additional thoughts', isMultiline: true }
+      ];
 
-      const submitBtn = document.getElementById('submitBtn');
-      const pdfBtn = document.getElementById('pdfBtn');
-      const answersContainer = document.getElementById('answersContainer');
-      const answersList = document.getElementById('answersList');
-
-      function getVal(id) {
-        const el = document.getElementById(id);
-        return el ? el.value.trim() : '';
-      }
-
-      function buildAnswers() {
-        const range = document.getElementById('dateRangeHidden').value || dateRange;
-
-        const q1 = getVal('q1') || '—';
-        const q2 = getVal('q2') || '—';
-        const q3 = getVal('q3') || '—';
-        const q4 = getVal('q4') || '—';
-        const q4b = getVal('q4b') || '—';
-        const q5 = getVal('q5') || '—';
-        const q5b = getVal('q5b') || '—';
-        const q6 = getVal('q6') || '—';
-        const q7 = getVal('q7') || '—';
-        const q7b = getVal('q7b') || '—';
-        const q8 = getVal('q8') || '—';
-        const q9 = getVal('q9') || '—';
-        const q10 = getVal('q10') || '—';
-        const q11 = getVal('q11') || '—';
-        const q12 = getVal('q12') || '—';
-
-        return {
-          range,
-          q1, q2, q3, 
-          q4, q4b, 
-          q5, q5b, 
-          q6, 
-          q7, q7b, 
-          q8, q9, q10, q11, q12
-        };
-      }
-
-      function renderAnswers() {
-        const data = buildAnswers();
-        const items = [
-          { label: '1️⃣ Team size using form', value: data.q1 },
-          { label: '2️⃣ Audit entries this week', value: data.q2 },
-          { label: '3️⃣ Errors / stuck (how often?)', value: data.q3 },
-          { label: '4️⃣ Old method (first person)', value: data.q4 },
-          { label: '4️⃣ Old method (second person)', value: data.q4b },
-          { label: '5️⃣ Old time per site (first)', value: data.q5 },
-          { label: '5️⃣ Old time per site (second)', value: data.q5b },
-          { label: '6️⃣ Time now using form', value: data.q6 },
-          { label: '7️⃣ Lost details old method (first)', value: data.q7 },
-          { label: '7️⃣ Lost details old method (second)', value: data.q7b },
-          { label: '8️⃣ Easier on phone?', value: data.q8 },
-          { label: '9️⃣ Annoying / changes wanted', value: data.q9 },
-          { label: '🔟 Saves time, no diff, slower?', value: data.q10 },
-          { label: '💬 Honest quote (Q11)', value: data.q11 },
-          { label: '💭 Additional thoughts', value: data.q12 }
-        ];
-
-        let html = `<div style="margin-bottom: 0.8rem; background: #f3ebfc; border-radius: 60px; padding: 0.3rem 1.2rem; display:inline-block; font-weight:500;">📆 ${data.range}</div>`;
-        items.forEach(item => {
-          html += `<div class="answer-item"><strong>${item.label}:</strong> ${item.value}</div>`;
+      // ---------- Collect form values ----------
+      function collectAnswers() {
+        const answers = {};
+        FIELDS.forEach(f => {
+          const el = form.elements[f.key];
+          let value = '';
+          if (el) {
+            value = (el.value || '').trim();
+          }
+          answers[f.key] = value || '—';
         });
-
-        answersList.innerHTML = html;
-        answersContainer.style.display = 'block';
-        answersContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return answers;
       }
 
-      // Show answers button
-      submitBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        renderAnswers();
+      // ---------- SHOW ANSWERS ----------
+      document.getElementById('showAnswersBtn').addEventListener('click', function() {
+        const answers = collectAnswers();
+        let output = '✨ Your answers ✨\n\n';
+        FIELDS.forEach(f => {
+          output += `• ${f.label}:\n   ${answers[f.key]}\n\n`;
+        });
+        alert(output);
       });
 
-      // PDF download button
-      pdfBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // First, make sure answers are shown so PDF includes them
-        renderAnswers();
-        
-        // Show loading state
-        pdfBtn.classList.add('btn-
+      // ---------- DOWNLOAD PDF (real PDF) ----------
+      document.getElementById('downloadPdfBtn').addEventListener('click', function() {
+        // Check jsPDF loaded
+        if (!window.jspdf || !window.jspdf.jsPDF) {
+          showToast('PDF library failed to load. Check internet.', 'error');
+          return;
+        }
+
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF({
+          unit: 'pt',
+          format: 'a4',
+          orientation: 'portrait'
+        });
+
+        const answers = collectAnswers();
+        const pageWidth  = doc.internal.pageSize.getWidth();
+        const pageHeight = doc.internal.pageSize.getHeight();
+        const margin = 48;
+        const contentWidth = pageWidth - margin * 2;
+        let y = margin;
+
+        // ---------- Header Banner ----------
+        doc.setFillColor(126, 94, 255); // purple
+        doc.rect(0, 0, pageWidth, 90, 'F');
+
+        doc.setFillColor(79, 140, 255); // blue overlay
+        doc.rect(0, 0, pageWidth / 2, 90, 'F');
+
+        doc.setTextColor(255, 255, 255);
+        doc.setFont('helvetica', 'bold');
+        doc.setFontSize(22);
+        doc.text('Site Audit Feedback', margin, 45);
+
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(11);
+        doc.text('Summary of team responses', margin, 68);
+
+        y = 130;
+
+        // ---------- Generated timestamp ----------
+        doc.setTextColor(120, 120, 140);
+        doc.setFontSize(10);
+        doc.setFont('helvetica', 'italic');
+        doc.text(
+          'Generated: ' + new Date().toLocaleString(),
+          margin,
+          y
+        );
+        y += 24;
+
+        // Divider
+        doc.setDrawColor(220, 220, 240);
+        doc.setLineWidth(1);
+        doc.line(margin, y, pageWidth - margin, y);
+        y += 20;
+
+        // ---------- Answers ----------
+        FIELDS.forEach((field, index) => {
+          const value = answers[field.key];
+          const isMultiline = field.isMultiline || value.length > 70;
+
+          // Estimate needed height for this block
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(11);
+          const labelLines = doc.splitTextToSize(field.label, contentWidth);
+
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(11);
+          const valueLines = doc.splitTextToSize(value, contentWidth - 12);
+
+          const blockHeight = (labelLines.length * 15) + (valueLines.length * 15) + 26;
+
+          // Page break if needed
+          if (y + blockHeight > pageHeight - margin) {
+            doc.addPage();
+            y = margin;
+          }
+
+          // Question number badge (colored circle)
+          const badgeRadius = 10;
+          const badgeX = margin + badgeRadius;
+          const badgeY = y + 4;
+
+          doc.setFillColor(126, 94, 255);
+          doc.circle(badgeX, badgeY, badgeRadius, 'F');
+
+          doc.setTextColor(255, 255, 255);
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(9);
+          const numLabel = String(index + 1);
+          const numWidth = doc.getTextWidth(numLabel);
+          doc.text(numLabel, badgeX - numWidth / 2, badgeY + 3);
+
+          // Label text
+          doc.setTextColor(30, 43, 60);
+          doc.setFont('helvetica', 'bold');
+          doc.setFontSize(11);
+          doc.text(labelLines, margin + 30, y + 8);
+          y += labelLines.length * 15 + 6;
+
+          // Value text
+          doc.setTextColor(60, 70, 90);
+          doc.setFont('helvetica', 'normal');
+          doc.setFontSize(11);
+          doc.text(valueLines, margin + 30, y + 4);
+          y += valueLines.length * 15 + 14;
+
+          // Light separator between entries
+          if (index < FIELDS.length - 1) {
+            doc.setDrawColor(240, 240, 250);
+            doc.setLineWidth(0.5);
+            doc.line(margin + 30, y - 4, pageWidth - margin, y - 4);
+          }
+
+          y += 6;
+        });
+
+        // ---------- Footer on every page ----------
+        const totalPages = doc.internal.getNumberOfPages();
+        for (let p = 1; p <= totalPages; p++) {
+          doc.setPage(p);
+          doc.setFont('helvetica', 'italic');
+          doc.setFontSize(9);
+          doc.setTextColor(150, 150, 170);
+          doc.text(
+            `Page ${p} of ${totalPages}   ·   Thank you! 💜`,
+            pageWidth / 2,
+            pageHeight - 24,
+            { align: 'center' }
+          );
+        }
+
+        // ---------- Save ----------
+        const filename = 'site_audit_feedback_' +
+          new Date().toISOString().slice(0, 10) + '.pdf';
+        doc.save(filename);
+        showToast('✅ PDF downloaded: ' + filename, 'success');
+      });
+    })();
+  </script>
+</body>
+</html>
