@@ -85,28 +85,6 @@
       box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
     }
 
-    .badge-status {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--success);
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      padding: 4px 10px;
-      border-radius: 999px;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .badge-status::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--success);
-      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
-    }
-
     /* ---------- Hero ---------- */
     .hero {
       background: var(--surface);
@@ -355,14 +333,9 @@
       padding: 20px 32px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-end;
       gap: 12px;
       flex-wrap: wrap;
-    }
-
-    .form-actions__note {
-      font-size: 12.5px;
-      color: var(--text-3);
     }
 
     .form-actions__buttons {
@@ -465,7 +438,6 @@
 
       .form-card__body { padding: 4px 20px; }
       .form-actions { padding: 16px 20px; flex-direction: column-reverse; align-items: stretch; }
-      .form-actions__note { text-align: center; }
       .form-actions__buttons { flex-direction: column; }
       .btn { width: 100%; }
 
@@ -490,14 +462,13 @@
         <span class="brand__mark">SA</span>
         <span>Site Audit Tool</span>
       </div>
-      <span class="badge-status">No login required · Data stays on your device</span>
     </div>
 
     <!-- Hero -->
     <header class="hero">
       <div class="hero__eyebrow">Feedback Form</div>
       <h1>Site Audit Feedback</h1>
-      <p>Help us evaluate the new audit submission process. Your answers stay on your device and are only shared when you export the PDF.</p>
+      <p>Help us evaluate the new audit submission process. Your answers help us improve the workflow for the team.</p>
 
       <div class="hero__meta">
         <div class="meta-item">
@@ -505,12 +476,6 @@
             <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
           </svg>
           <span>Takes about 3 minutes</span>
-        </div>
-        <div class="meta-item">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-          </svg>
-          <span>Data stays on your device</span>
         </div>
         <div class="meta-item">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -723,7 +688,6 @@
 
       <!-- Actions -->
       <div class="form-actions">
-        <div class="form-actions__note">No login. No tracking. Data stays in your browser.</div>
         <div class="form-actions__buttons">
           <button type="button" class="btn btn-secondary" id="showAnswersBtn">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
