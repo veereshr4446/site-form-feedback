@@ -10,7 +10,7 @@ Here's the **final README** — copy everything in the block below and paste it 
 
 ## ✨ Overview
 
-This is a **zero-dependency, single-file web form** designed to gather qualitative and quantitative feedback from a team that recently switched to a new audit-submission process. It captures baseline data (old vs. new workflow), pain points, error frequency, and an honest one-liner — then produces a clean, shareable PDF on demand.
+This is a zero-dependency, single-file web form designed to gather qualitative and quantitative feedback from a team that recently switched to a new audit-submission process. It captures baseline data (old vs. new workflow), pain points, error frequency, and an honest one-liner — then produces a clean, shareable PDF on demand.
 
 Perfect for:
 
@@ -23,9 +23,9 @@ Perfect for:
 
 ## 🔗 Live Demo
 
-**Try it here →** [https://veereshr4446.github.io/site-form-feedback/](https://veereshr4446.github.io/site-form-feedback/)
+Try it here → [https://veereshr4446.github.io/site-form-feedback/](https://veereshr4446.github.io/site-form-feedback/)
 
-Open it on your phone, fill it in, hit **Download PDF** — you'll get a real, properly formatted PDF.
+Open it on your phone, fill it in, hit Download PDF — you'll get a real, properly formatted PDF.
 
 ---
 
