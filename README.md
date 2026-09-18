@@ -1,276 +1,293 @@
-Here's the **final README** — copy everything in the block below and paste it into your empty `README.md` on GitHub.
+
+# Site Audit Feedback Form
+
+A single-file, browser-based feedback form for collecting structured input from field teams about a site audit submission process. Responses can be exported as a formatted PDF — no backend, no login, no setup required.
+
+**Live demo:** https://veereshr4446.github.io/site-form-feedback/
+**Repository:** https://github.com/veereshr4446/site-form-feedback
 
 ---
 
-```markdown
-# 📋 Site Audit Feedback Form
+## Overview
 
-> A beautiful, mobile-friendly, single-file HTML form that collects team feedback about a site-audit process — and exports the answers as a **real, styled PDF** with one click.
----
+This project provides a lightweight, self-contained web form designed to gather qualitative and quantitative feedback about an internal audit workflow. It captures baseline comparison data (old process vs. new process), operational pain points, error frequency, and free-form commentary.
 
-## ✨ Overview
+The form requires no server, no database, and no third-party form service. It runs entirely in the browser and exports responses on demand as a PDF document.
 
-This is a zero-dependency, single-file web form designed to gather qualitative and quantitative feedback from a team that recently switched to a new audit-submission process. It captures baseline data (old vs. new workflow), pain points, error frequency, and an honest one-liner — then produces a clean, shareable PDF on demand.
+### Use cases
 
-Perfect for:
-
-- 🧑‍💼 Internal process reviews
-- 📊 Post-rollout feedback collection
-- 🗂️ Quick field-team surveys
-- 📱 On-site data capture (mobile-first design)
+- Internal process reviews
+- Post-rollout feedback collection
+- Field-team surveys
+- On-site data capture from mobile devices
 
 ---
 
-## 🔗 Live Demo
+## Features
 
-Try it here → [https://veereshr4446.github.io/site-form-feedback/](https://veereshr4446.github.io/site-form-feedback/)
-
-Open it on your phone, fill it in, hit Download PDF — you'll get a real, properly formatted PDF.
-
----
-
-## 💡 Why I built this
-
-Our team was moving from *"WhatsApp + paper + Excel later"* to a proper
-audit form. Before rolling it out wide, I wanted honest feedback —
-how long the old way took, what people lost, what annoys them now.
-
-Rather than spin up a Google Form or a server, I wrote this as a
-**single HTML file** so anyone could open it on their phone at a site,
-fill it in, and export a real PDF to send back. No backend, no login,
-no data leaving the browser.
+- Single-file implementation — `index.html` contains the full application
+- Responsive layout optimized for both desktop and mobile browsers
+- Seventeen structured input fields (text, number, select, textarea)
+- Multi-person response support for comparison questions
+- Client-side PDF generation using jsPDF
+- Auto-paginated PDF output with page footers
+- In-form progress indicator
+- Answer preview before export
+- Toast notifications for user feedback
+- No build step, no local dependencies
 
 ---
 
-## 🚀 Features
+## Technology
 
-| Feature | Description |
+| Layer | Choice |
 |---|---|
-| 🎨 **Beautiful UI** | Glassmorphism container, gradient badges, soft shadows, pastel background |
-| 📱 **Mobile-first** | Single-column layout, full-width buttons, big tap targets under 640px |
-| 📝 **17 structured fields** | Mix of `text`, `number`, `select`, and `textarea` inputs |
-| 👥 **Multi-person questions** | Q4, Q5, Q7 collect answers from *two people* side-by-side |
-| 📄 **Real PDF export** | Uses [jsPDF](https://github.com/parallax/jsPDF) — not a fake `.pdf` blob |
-| 🧾 **Auto-paginated PDF** | Multi-page support with page footer (`Page X of Y`) |
-| 🎨 **Styled PDF output** | Gradient header banner, colored number badges, timestamp |
-| ✨ **"Show answers" preview** | Instant summary before exporting |
-| 🔔 **Toast notifications** | Non-intrusive success/error feedback |
-| 🌐 **No build step** | Just open the HTML file — no npm, no bundler, no server |
-| 📦 **Single file** | Entire app = one `.html` file |
+| Markup | HTML5 |
+| Styling | Vanilla CSS (custom properties, grid, flexbox) |
+| Behavior | Vanilla JavaScript (ES5-compatible syntax) |
+| PDF engine | jsPDF 2.5.1 (loaded from CDN) |
+| Fonts | System font stack |
+
+No frameworks, no bundlers, no package manager required.
 
 ---
 
-## 📁 Project Structure
+## Project structure
 
 ```
 site-form-feedback/
-├── index.html      ← the entire app (HTML + CSS + JS)
-└── README.md
+├── index.html      Application source (HTML + CSS + JS)
+├── README.md       This document
+└── LICENSE         MIT license
 ```
 
-Yes, really. One file.
-
 ---
 
-## 🛠️ Tech Stack
+## Getting started
 
-- **HTML5** — semantic structure
-- **Vanilla CSS** — grid, flexbox, custom properties, media queries
-- **Vanilla JavaScript** — no framework, no jQuery
-- **jsPDF 2.5.1** — loaded from CDN for real PDF generation
-- **System fonts** — fast, no font downloads required
+### Option 1 — Open directly
 
----
-
-## 📦 Getting Started
-
-### Option 1 — Just open it
 ```bash
 git clone https://github.com/veereshr4446/site-form-feedback.git
 cd site-form-feedback
-open index.html   # macOS
-# or: start index.html  (Windows)
-# or: xdg-open index.html  (Linux)
 ```
 
-### Option 2 — Serve locally (recommended for mobile testing)
+Open `index.html` in any modern browser.
+
+### Option 2 — Serve locally
+
+For mobile testing on the same network:
+
 ```bash
 npx serve .
-# or
+```
+
+or
+
+```bash
 python3 -m http.server 8080
 ```
-Then visit `http://localhost:8080` — and on your phone, hit `http://YOUR_LAN_IP:8080`.
 
-### Option 3 — Use the hosted version
-👉 [https://veereshr4446.github.io/site-form-feedback/](https://veereshr4446.github.io/site-form-feedback/)
+Then visit `http://localhost:8080` on your computer, or `http://<your-lan-ip>:8080` on your phone.
+
+### Option 3 — Hosted version
+
+The form is deployed via GitHub Pages:
+
+https://veereshr4446.github.io/site-form-feedback/
 
 ---
 
-## 📄 The 17 Fields
+## Form fields
 
-| # | Question | Type |
+| # | Question | Input type |
 |---|---|---|
-| 1 | Roughly how many people on the team are using the form? | `number` |
-| 2 | How many audit entries submitted this week? (`=COUNTA()`) | `text` |
-| 3a | Errors / stuck while submitting — how often? | `select` |
-| 3b | Error details (optional) | `text` |
-| 4 | Before this form, how did you usually record a site audit? *(first + second person)* | `text × 2` |
-| 5 | Old way: time per site *(first + second person)* | `text × 2` |
-| 6 | How long does it take now, using the form? | `text` |
-| 7 | Lost / forgot details with old method? *(first + second person)* | `text × 2` |
-| 8 | Easier to fill on phone at the site? | `text` |
-| 9 | Anything annoying or you'd want changed? | `textarea` |
-| 10a | Would you say: saves time / no difference / slower? | `select` |
-| 10b | Time-impact comment (optional) | `text` |
-| 11 | One honest sentence about how it's working | `textarea` |
-| + | Additional thoughts | `textarea` |
+| 1 | Team members using the form | number |
+| 2 | Audit entries submitted this week | text |
+| 3a | Error/stuck frequency | select |
+| 3b | Error details | text |
+| 4 | Previous recording method (two respondents) | text × 2 |
+| 5 | Previous time per site (two respondents) | text × 2 |
+| 6 | Current time per site | text |
+| 7 | Details lost with old method (two respondents) | text × 2 |
+| 8 | Mobile usability comparison | text |
+| 9 | Issues or suggestions | textarea |
+| 10a | Time impact verdict | select |
+| 10b | Time impact comment | text |
+| 11 | One-sentence summary | textarea |
+| + | Additional thoughts | textarea |
 
 ---
 
-## 🧠 How the PDF Works
+## How the PDF export works
 
-The PDF export is done entirely client-side:
+The export runs entirely in the browser:
 
-1. On click, values are collected from the form via `form.elements`.
-2. `jsPDF` creates an A4 document.
-3. A gradient header is drawn with two overlapping `rect()` fills.
-4. Each field is rendered with:
-   - a **filled circle badge** (question number),
-   - **bold label** (auto-wrapped with `splitTextToSize`),
-   - **value** below it (auto-wrapped).
-5. When `y` approaches the page bottom, `doc.addPage()` is called and `y` resets.
-6. After all fields, a loop adds `Page X of Y` footers to every page.
-7. `doc.save('site_audit_feedback_YYYY-MM-DD.pdf')` triggers the download.
+1. On click, values are read from `form.elements` and normalized.
+2. A new A4 document is created with jsPDF.
+3. A header block renders the title and a generation timestamp.
+4. Each field is rendered with a labeled section; long values wrap automatically using `splitTextToSize`.
+5. When the vertical cursor approaches the page margin, `doc.addPage()` is called and the cursor resets.
+6. A footer with page numbers is applied to every page after all content is written.
+7. The file is saved as `site-audit-feedback-YYYY-MM-DD.pdf`.
 
-No server, no uploads, no data leaves the browser. 🔒
+No network requests occur during export. The PDF is generated locally and saved directly to the user's device.
 
 ---
 
-## 🔧 Customization
+## Customization
 
-All customization happens inside the single `index.html`.
+### Adding or removing a field
 
-### Add / remove / reorder fields
+1. Add the input inside the `.form-card__body` section:
 
-1. Add the HTML input inside the `.grid`:
-   ```html
-   <div class="card">
-     <div class="label-row">
-       <span class="q-num">12</span>
-       <span class="q-text">Your new question?</span>
-     </div>
-     <input type="text" name="yourFieldName" placeholder="…" />
-   </div>
-   ```
+```html
+<div class="field-group">
+  <div class="field-group__head">
+    <span class="field-num">12</span>
+    <label class="field-label" for="newField">Your question</label>
+  </div>
+  <div class="input-wrap">
+    <input type="text" id="newField" name="newField" placeholder="…" />
+  </div>
+</div>
+```
 
-2. Register it in the `FIELDS` array in the script:
-   ```js
-   const FIELDS = [
-     // …
-     { key: 'yourFieldName', label: '12. Your new question' }
-   ];
-   ```
+2. Register the field in the `FIELDS` array in the script:
 
-That's it — it will now appear in **Show answers** and in the **PDF**.
+```js
+const FIELDS = [
+  // …
+  { key: 'newField', label: '12. Your question' }
+];
+```
+
+The field will automatically appear in the preview and the PDF export.
 
 ### Multiline values
-Set `isMultiline: true` in the field definition to hint larger text blocks:
+
+Set `multiline: true` in the field definition for textareas:
+
 ```js
-{ key: 'annoyances', label: '9. Annoying / would change', isMultiline: true }
+{ key: 'annoyances', label: '9. Issues / suggestions', multiline: true }
 ```
 
-### Change the PDF colors
-Look for these hex values in the script:
-```js
-doc.setFillColor(126, 94, 255);  // purple banner
-doc.setFillColor(79, 140, 255);  // blue banner overlay
-doc.setFillColor(126, 94, 255);  // number badge
-```
+### Theming
 
-### Change the theme (web UI)
-Edit the gradients in `<style>`:
+The palette is defined in the `:root` block:
+
 ```css
-body { background: linear-gradient(145deg, #f9f0ff 0%, #e5f4ff 100%); }
-.btn-primary { background: linear-gradient(135deg, #7e5eff, #4f8cff); }
+:root {
+  --accent: #2563eb;
+  --text:   #0f172a;
+  --bg:     #f6f8fb;
+  --border: #e5e9f0;
+  /* … */
+}
 ```
 
+Changing these values updates the entire UI consistently.
+
 ---
 
-## 🌐 Browser Support
+## Browser support
 
-| Browser | Supported |
+| Browser | Status |
 |---|---|
-| Chrome / Edge (latest) | ✅ |
-| Firefox (latest) | ✅ |
-| Safari (iOS 14+) | ✅ |
-| Samsung Internet | ✅ |
-| IE 11 | ❌ (uses modern JS + CSS) |
+| Chrome / Edge (current) | Supported |
+| Firefox (current) | Supported |
+| Safari (iOS 14+) | Supported |
+| Samsung Internet | Supported |
+| Internet Explorer 11 | Not supported |
 
-> ⚠️ **Requires internet on first load** to fetch jsPDF from the CDN.
-> To go fully offline, download `jspdf.umd.min.js` and point the script tag to your local copy.
-
----
-
-## 🔒 Privacy
-
-- All processing is **client-side**.
-- No data is sent to any server.
-- No analytics, no cookies, no tracking.
-- The only external request is the jsPDF CDN script.
+The form requires JavaScript enabled and internet access on first load for the jsPDF dependency.
 
 ---
 
-## 🗺️ Roadmap
+## Accessibility
 
-- [ ] Optional `localStorage` autosave (draft recovery)
-- [ ] Dark mode toggle
-- [ ] CSV / JSON export alongside PDF
-- [ ] Form validation with inline errors
-- [ ] Offline jsPDF bundling
-
-PRs welcome!
+- All inputs have associated `<label>` elements.
+- Focus states are visible (blue ring).
+- Color contrast meets WCAG AA for body text.
+- Buttons are keyboard-navigable.
+- The toast uses `role="status"` and `aria-live="polite"`.
 
 ---
 
-## 🤝 Contributing
+## Roadmap
 
-1. Fork the repo
-2. Create your branch: `git checkout -b feature/amazing-idea`
-3. Commit: `git commit -m "Add amazing idea"`
-4. Push: `git push origin feature/amazing-idea`
-5. Open a Pull Request
+- [ ] Optional draft autosave via `localStorage`
+- [ ] Light/dark theme toggle
+- [ ] CSV and JSON export alongside PDF
+- [ ] Inline validation messages
+- [ ] Bundled offline jsPDF
 
-Please keep it **single-file friendly** — no build step.
+Pull requests are welcome.
 
 ---
 
-## 👤 Author
+## Contributing
+
+1. Fork the repository.
+2. Create a feature branch: `git checkout -b feature/your-feature`.
+3. Commit your changes: `git commit -m "Add your feature"`.
+4. Push to the branch: `git push origin feature/your-feature`.
+5. Open a pull request.
+
+Keep the project single-file. Do not introduce a build step.
+
+---
+
+## Author
 
 **Viresh Ranjanagi**
-- GitHub: [@veereshr4446](https://github.com/veereshr4446)
-- Live Demo: [veereshr4446.github.io/site-form-feedback](https://veereshr4446.github.io/site-form-feedback/)
-- Built this form from scratch for our team's audit workflow.
+- GitHub: https://github.com/veereshr4446
+- Live demo: https://veereshr4446.github.io/site-form-feedback/
 
 ---
 
-## 📜 License
+## License
 
-[MIT](LICENSE) © Viresh Ranjanagi
-
-Free to use, modify, and share. Attribution appreciated but not required.
+Released under the [MIT License](LICENSE).
 
 ---
 
-## 🙏 Acknowledgements
+## Acknowledgements
 
-- [jsPDF](https://github.com/parallax/jsPDF) — the real-PDF engine
-- Emoji icons via [Unicode](https://unicode.org/emoji/charts/full-emoji-list.html)
-
----
-
-## ⭐ Show your support
-
-If this saved you time, drop a ⭐ on the repo — it helps more teams find it!
-
-👉 [https://github.com/veereshr4446/site-form-feedback](https://github.com/veereshr4446/site-form-feedback)
+- [jsPDF](https://github.com/parallax/jsPDF) — client-side PDF generation
+- Icons rendered inline as SVG
 ```
+
+---
+
+## 📋 Final steps
+
+1. **Open your repo:** https://github.com/veereshr4446/site-form-feedback
+2. **Click `README.md`** → ✏️ pencil icon
+3. **Ctrl + A** → **Delete** (clear the empty file)
+4. **Paste the block above** (everything between the ``` fences — do **not** copy the fences themselves)
+5. **Commit** with message: `Add professional README`
+6. **Add a LICENSE file** (optional but recommended):
+   - Repo → **Add file** → **Create new file**
+   - Name it: `LICENSE`
+   - Click **"Choose a license template"** → pick **MIT** → fill in "Viresh Ranjanagi" → **Review and submit**
+
+That's it — your repo now looks complete and professional. 🎯
+
+---
+
+## 🎁 Bonus — Repo description & topics
+
+While you're on the repo page, click the ⚙️ gear icon next to **"About"** on the right side, and fill in:
+
+**Description:**
+```
+Browser-based feedback form for collecting structured site audit input and exporting responses as PDF. Single-file, no backend.
+```
+
+**Topics (tags):**
+```
+html, css, javascript, jspdf, feedback-form, audit-form, pdf-export, single-file, no-backend, github-pages
+```
+
+**Website:** `https://veereshr4446.github.io/site-form-feedback/`
