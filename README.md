@@ -6,15 +6,6 @@ Here's the **final README** — copy everything in the block below and paste it 
 # 📋 Site Audit Feedback Form
 
 > A beautiful, mobile-friendly, single-file HTML form that collects team feedback about a site-audit process — and exports the answers as a **real, styled PDF** with one click.
-
-[![Live Demo](https://img.shields.io/badge/Live%20Demo-veereshr4446.github.io-7e5eff?style=flat-square)](https://veereshr4446.github.io/site-form-feedback/)
-[![Repo](https://img.shields.io/badge/GitHub-site--form--feedback-181717?style=flat-square&logo=github)](https://github.com/veereshr4446/site-form-feedback)
-![HTML](https://img.shields.io/badge/HTML5-E34F26?style=flat-square&logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS3-1572B6?style=flat-square&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![jsPDF](https://img.shields.io/badge/jsPDF-2.5.1-7e5eff?style=flat-square)
-![No Build](https://img.shields.io/badge/build-none-success?style=flat-square)
-
 ---
 
 ## ✨ Overview
